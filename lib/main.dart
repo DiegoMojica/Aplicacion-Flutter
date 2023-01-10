@@ -41,8 +41,23 @@ class _HomeState extends State<Home> {
               ),
             ),
             child: Image.asset("assets/pensador.webp"),
-            height: 200,
-          )
+            height: 300,
+          ),
+          Center(
+              child: Card(
+            margin: const EdgeInsets.only(left: 20, right: 20, top: 260),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 20),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  TextFormField(
+                    decoration: InputDecoration(labelText: "Usuario:"),
+                  )
+                ],
+              ),
+            ),
+          ))
         ],
       ),
     );
