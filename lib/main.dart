@@ -22,17 +22,22 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  bool _loading = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
         children: <Widget>[
+          //Imagen (pensador.webp)
           Container(
             width: double.infinity,
             padding: EdgeInsets.symmetric(vertical: 0),
             child: Image.asset("assets/pensador.webp"),
             height: 300,
           ),
+
+          //Usuario y Contraseña
           Center(
               child: Card(
             margin: const EdgeInsets.only(left: 20, right: 20, top: 60),
@@ -47,7 +52,33 @@ class _HomeState extends State<Home> {
                   TextFormField(
                     decoration: InputDecoration(labelText: "Contraseña"),
                     obscureText: true,
-                  )
+                  ),
+
+                  //Boton
+                  MaterialButton(
+                    color: Theme.of(context).primaryColor,
+                    padding: const EdgeInsets.symmetric(vertical: 15),
+                    onPressed: () {
+                      _login(context);
+                    },
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            "Iniciar sesión",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          if (_loading) //circulo de carga
+                            Container(
+                              height: 20,
+                              width: 20,
+                              margin: const EdgeInsets.only(left: 20),
+                              child: CircularProgressIndicator(
+                                color: Colors.white,
+                              ),
+                            )
+                        ]),
+                  ),
                 ],
               ),
             ),
@@ -55,5 +86,14 @@ class _HomeState extends State<Home> {
         ],
       ),
     );
+  }
+
+//circuñp
+  void _login(BuildContext context) {
+    if (!_loading) {
+      setState(() {
+        _loading = true;
+      });
+    }
   }
 }
