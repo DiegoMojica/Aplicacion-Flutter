@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Search.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -8,6 +9,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final _formKey = GlobalKey<FormState>();
   bool _loading = false;
 
   @override
@@ -33,19 +35,28 @@ class _HomeState extends State<Home> {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   TextFormField(
-                      decoration: InputDecoration(labelText: "Usuario")),
+                    decoration: InputDecoration(labelText: "Usuario"),
+                  ),
                   SizedBox(height: 40),
                   TextFormField(
                     decoration: InputDecoration(labelText: "Contraseña"),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "ERROR:El usuario o contraseña esta incorrecta,vuelvalo intentarlo";
+                      }
+                      return null;
+                    },
                     obscureText: true,
                   ),
                   SizedBox(height: 30),
 
                   //Boton
                   MaterialButton(
-                    color: Color.fromRGBO(52, 75, 181, 255),
+                    color: Color.fromARGB(255, 29, 73, 219),
                     padding: const EdgeInsets.symmetric(vertical: 15),
                     onPressed: () {
+                      Navigator.of(context).push(
+                          MaterialPageRoute(builder: ((context) => search())));
                       _login(context);
                     },
                     child: Row(
@@ -78,7 +89,10 @@ class _HomeState extends State<Home> {
                         "¿No estas registrado?",
                       ),
                       TextButton(
-                        child: Text("Registrarse"),
+                        child: Text(
+                          "Registrarse",
+                          selectionColor: Color.fromARGB(255, 29, 73, 219),
+                        ),
                         onPressed: () {
                           Navigator.of(context).pushNamed(
                             "/register",
