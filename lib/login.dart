@@ -26,9 +26,9 @@ class _HomeState extends State<Home> {
           //Usuario y Contraseña
           Center(
               child: Card(
-            margin: const EdgeInsets.only(left: 20, right: 20, top: 60),
+            margin: const EdgeInsets.only(left: 20, right: 20, top: 10),
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 40),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
@@ -39,6 +39,7 @@ class _HomeState extends State<Home> {
                     decoration: InputDecoration(labelText: "Contraseña"),
                     obscureText: true,
                   ),
+                  SizedBox(height: 30),
 
                   //Boton
                   MaterialButton(
@@ -65,6 +66,27 @@ class _HomeState extends State<Home> {
                             )
                         ]),
                   ),
+
+                  //Opcion para registrarse
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        "¿No estas registrado?",
+                      ),
+                      TextButton(
+                        child: Text("Registrarse"),
+                        onPressed: () {
+                          Navigator.of(context).pushNamed(
+                            "/register",
+                          );
+                        },
+                      )
+                    ],
+                  )
                 ],
               ),
             ),
@@ -74,7 +96,7 @@ class _HomeState extends State<Home> {
     );
   }
 
-//circuñp
+//circulo de carga
   void _login(BuildContext context) {
     if (!_loading) {
       setState(() {
