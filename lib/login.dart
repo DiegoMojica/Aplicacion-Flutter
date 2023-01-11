@@ -43,7 +43,7 @@ class _HomeState extends State<Home> {
 
                   //Boton
                   MaterialButton(
-                    color: Theme.of(context).primaryColor,
+                    color: Color.fromRGBO(52, 75, 181, 255),
                     padding: const EdgeInsets.symmetric(vertical: 15),
                     onPressed: () {
                       _login(context);
