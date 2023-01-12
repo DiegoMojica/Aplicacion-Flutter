@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/login.dart';
 //import 'login.dart';
-import 'Search.dart';
+import 'search.dart';
 
 void main() => runApp(MyApp());
 
