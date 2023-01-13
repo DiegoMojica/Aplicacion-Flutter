@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/formulario/form.dart';
 import 'package:flutter_application_1/search.dart';
 
 class Home extends StatefulWidget {
@@ -95,9 +96,8 @@ class _HomeState extends State<Home> {
                           selectionColor: Color.fromARGB(255, 29, 73, 219),
                         ),
                         onPressed: () {
-                          Navigator.of(context).pushNamed(
-                            "/register",
-                          );
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: ((context) => MyHome())));
                         },
                       )
                     ],
