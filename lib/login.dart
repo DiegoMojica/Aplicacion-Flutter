@@ -53,6 +53,9 @@ class _HomeState extends State<Home> {
 
                   //Boton
                   MaterialButton(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
                     color: Color.fromARGB(255, 29, 73, 219),
                     padding: const EdgeInsets.symmetric(vertical: 15),
                     onPressed: () {
