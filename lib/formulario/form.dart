@@ -31,12 +31,6 @@ class _MyHomeState extends State<MyHome> {
             style: TextStyle(fontSize: 28),
           ),
           centerTitle: true,
-          actions: <Widget>[
-            IconButton(
-              icon: new Icon(Icons.menu),
-              onPressed: () => print('Sapo'),
-            ),
-          ],
         ),
         body: Padding(
           padding: EdgeInsets.all(10),
@@ -120,8 +114,14 @@ class _MyHomeState extends State<MyHome> {
                 height: 10,
               ),
               MaterialButton(
-                  color: Colors.blueGrey,
-                  child: Text('Mostrar segunda pantalla'),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  color: Color.fromARGB(255, 29, 73, 219),
+                  child: Text(
+                    'Mostrar segunda pantalla',
+                    style: TextStyle(color: Colors.white),
+                  ),
                   onPressed: () {
                     _showSecondPage(context);
                   }),
@@ -137,7 +137,7 @@ class _MyHomeState extends State<MyHome> {
       child: const Text('Correo: ',
           style: TextStyle(
               fontSize: 21,
-              color: Color.fromARGB(255, 29, 73, 219),
+              color: Color.fromARGB(255, 0, 51, 78),
               fontWeight: FontWeight.bold)),
     );
   }
@@ -149,7 +149,7 @@ class _MyHomeState extends State<MyHome> {
       child: const Text('Segundo nombre: ',
           style: TextStyle(
               fontSize: 21,
-              color: Color.fromARGB(255, 29, 73, 219),
+              color: Color.fromARGB(255, 0, 51, 78),
               fontWeight: FontWeight.bold)),
     );
   }
@@ -161,7 +161,7 @@ class _MyHomeState extends State<MyHome> {
       child: const Text('Primer Nombre: ',
           style: TextStyle(
               fontSize: 21,
-              color: Color.fromARGB(255, 29, 73, 219),
+              color: Color.fromARGB(255, 0, 51, 78),
               fontWeight: FontWeight.bold)),
     );
   }
@@ -173,7 +173,7 @@ class _MyHomeState extends State<MyHome> {
       child: const Text('Primer Apellido: ',
           style: TextStyle(
               fontSize: 21,
-              color: Color.fromARGB(255, 29, 73, 219),
+              color: Color.fromARGB(255, 0, 51, 78),
               fontWeight: FontWeight.bold)),
     );
   }
@@ -185,7 +185,7 @@ class _MyHomeState extends State<MyHome> {
       child: const Text('Segundo Apellido: ',
           style: TextStyle(
               fontSize: 21,
-              color: Color.fromARGB(255, 29, 73, 219),
+              color: Color.fromARGB(255, 0, 51, 78),
               fontWeight: FontWeight.bold)),
     );
   }
@@ -197,7 +197,7 @@ class _MyHomeState extends State<MyHome> {
       child: const Text('Telefono: ',
           style: TextStyle(
               fontSize: 21,
-              color: Color.fromARGB(255, 29, 73, 219),
+              color: Color.fromARGB(255, 0, 51, 78),
               fontWeight: FontWeight.bold)),
     );
   }
@@ -209,7 +209,7 @@ class _MyHomeState extends State<MyHome> {
       child: const Text('Cedula: ',
           style: TextStyle(
               fontSize: 21,
-              color: Color.fromARGB(255, 29, 73, 219),
+              color: Color.fromARGB(255, 0, 51, 78),
               fontWeight: FontWeight.bold)),
     );
   }
@@ -221,7 +221,7 @@ class _MyHomeState extends State<MyHome> {
       child: const Text('UserName: ',
           style: TextStyle(
               fontSize: 21,
-              color: Color.fromARGB(255, 29, 73, 219),
+              color: Color.fromARGB(255, 0, 51, 78),
               fontWeight: FontWeight.bold)),
     );
   }
@@ -233,7 +233,7 @@ class _MyHomeState extends State<MyHome> {
       child: const Text('Pasword: ',
           style: TextStyle(
               fontSize: 21,
-              color: Color.fromARGB(255, 29, 73, 219),
+              color: Color.fromARGB(255, 0, 51, 78),
               fontWeight: FontWeight.bold)),
     );
   }
@@ -245,7 +245,7 @@ class _MyHomeState extends State<MyHome> {
       child: const Text('Descripcion: ',
           style: TextStyle(
               fontSize: 21,
-              color: Color.fromARGB(255, 29, 73, 219),
+              color: Color.fromARGB(255, 0, 51, 78),
               fontWeight: FontWeight.bold)),
     );
   }

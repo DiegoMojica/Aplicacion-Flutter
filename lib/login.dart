@@ -16,9 +16,9 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //Imagen (pensador.webp)
       body: ListView(
         children: <Widget>[
-          //Imagen (pensador.webp)
           Container(
             width: double.infinity,
             padding: EdgeInsets.symmetric(vertical: 0),
@@ -70,7 +70,9 @@ class _HomeState extends State<Home> {
                             "Iniciar sesión",
                             style: TextStyle(color: Colors.white),
                           ),
-                          if (_loading) //circulo de carga
+
+                          //circulo de carga
+                          if (_loading)
                             Container(
                               height: 20,
                               width: 20,

@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/formulario/datos.dart';
+import 'package:flutter_application_1/formulario/form.dart';
+import 'package:flutter_application_1/login.dart';
 
 class search extends StatefulWidget {
   const search({super.key});
@@ -14,10 +17,12 @@ class _searchState extends State<search> {
 //La parte de arriba el titulo
   Widget build(BuildContext context) {
     return Scaffold(
+      //menu desplegado "drawer"
       endDrawer: Drawer(
         child: Container(
           color: Colors.white,
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
                 width: 300,
@@ -28,36 +33,72 @@ class _searchState extends State<search> {
               const Text("Productores de software",
                   style:
                       TextStyle(fontWeight: FontWeight.bold, fontSize: (20))),
-              Container(
-                margin: const EdgeInsets.only(top: 30),
-                padding: const EdgeInsets.all(20),
-                width: double.infinity,
-                color: Colors.grey[100],
-                child: const Text("Buscador"),
+              SizedBox(
+                height: 5,
               ),
+              //buscador
               Container(
-                margin: const EdgeInsets.only(top: 2),
-                padding: const EdgeInsets.all(20),
-                width: double.infinity,
-                color: Colors.grey[100],
-                child: const Text("Registros"),
+                child: MaterialButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: ((context) => search())));
+                  },
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 122, vertical: 18),
+                  color: Color.fromARGB(255, 124, 123, 123),
+                  child: const Text(
+                    "Buscador",
+                    style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
               ),
+              SizedBox(
+                height: 4,
+              ),
+
+              //registro
+              Container(
+                child: MaterialButton(
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: ((context) => SegundaPage())));
+                  },
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 122, vertical: 18),
+                  color: Color.fromARGB(255, 124, 123, 123),
+                  child: const Text(
+                    "Registros",
+                    style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+
+              //Boto lateral de salir
               Expanded(child: Container()),
               Container(
-                margin: const EdgeInsets.only(top: 2),
-                padding: const EdgeInsets.all(20),
-                width: double.infinity,
-                color: Colors.black87,
-                alignment: Alignment.center,
-                child: const Text(
-                  "Salir",
-                  style: TextStyle(color: Colors.white),
+                child: MaterialButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: ((context) => Home())));
+                  },
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 137, vertical: 18),
+                  color: Colors.black87,
+                  child: const Text(
+                    "Salir",
+                    style: TextStyle(color: Colors.white),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
               )
             ],
           ),
         ),
       ),
+
+      //El appBar que es todo lo de arriba del body
       appBar: AppBar(
         title: Text(
           "Busqueda",
@@ -81,7 +122,7 @@ class _searchState extends State<search> {
                 "Usuario",
                 style: TextStyle(
                     fontSize: 25,
-                    color: Color.fromARGB(255, 28, 73, 219),
+                    color: Color.fromARGB(255, 0, 51, 78),
                     fontWeight: FontWeight.bold),
               ),
             ),
@@ -90,7 +131,6 @@ class _searchState extends State<search> {
             ),
 
             //El buscador
-
             Column(children: [
               Container(
                 width: MediaQuery.of(context).size.width * 0.9,
@@ -118,11 +158,11 @@ class _searchState extends State<search> {
               children: [
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 25, vertical: 2),
-                  child: MaterialButton(
+                  child: FloatingActionButton(
+                      backgroundColor: Color.fromARGB(255, 29, 73, 219),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50),
+                        borderRadius: BorderRadius.circular(100),
                       ),
-                      color: Color.fromARGB(255, 29, 73, 219),
                       child: Icon(Icons.search),
                       onPressed: (() {})),
                 )
