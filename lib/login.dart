@@ -3,7 +3,6 @@ import 'package:flutter_application_1/formulario/form.dart';
 import 'package:flutter_application_1/search.dart';
 
 class Home extends StatefulWidget {
-  //jhdfcjhdvchjsdvchjvchjc
   const Home({super.key});
 
   @override
