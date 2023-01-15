@@ -1,133 +1,217 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/formulario/datos.dart';
+import 'package:flutter_application_1/formulario/operaciones.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
-class MyHome extends StatefulWidget {
-  const MyHome({super.key});
+class SavePage extends StatefulWidget {
+  static const String ROUTE = "/save";
 
   @override
-  State<MyHome> createState() => _MyHomeState();
+  State<SavePage> createState() => _SavePageState();
 }
 
-class _MyHomeState extends State<MyHome> {
-  //variables de inpust
-  final nombrec = TextEditingController();
-  final nombre2c = TextEditingController();
-  final apellidoc = TextEditingController();
-  final apellido2c = TextEditingController();
-  final correc = TextEditingController();
-  final cedulac = TextEditingController();
-  final telefonc = TextEditingController();
-  final usuarioc = TextEditingController();
-  final contrasenac = TextEditingController();
-  final descripcionc = TextEditingController();
+class _SavePageState extends State<SavePage> {
+  final _formKey = GlobalKey<FormState>();
+  var cardTarjeta = MaskTextInputFormatter(
+      mask: 'CC #.###.###-###',
+      filter: {"#": RegExp(r'[0-9]')},
+      type: MaskAutoCompletionType.lazy);
+  var fecha = MaskTextInputFormatter(
+      mask: '##/##/####',
+      filter: {"#": RegExp(r'[0-9]')},
+      type: MaskAutoCompletionType.lazy);
+
+  var code = MaskTextInputFormatter(
+      mask: '###',
+      filter: {"#": RegExp(r'[0-9]')},
+      type: MaskAutoCompletionType.lazy);
+
+  var telefono = MaskTextInputFormatter(
+      mask: '+## (###) ###-##-##',
+      filter: {"#": RegExp(r'[0-9]')},
+      type: MaskAutoCompletionType.lazy);
+
+  final NombreController = TextEditingController();
+  final Nombre2Controller = TextEditingController();
+  final apellidoController = TextEditingController();
+  final apellido2Controller = TextEditingController();
+  final CorreoController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    Note note = ModalRoute.of(context)!.settings.arguments as Note;
+    _init(note);
+
+    return WillPopScope(
+      onWillPop: _onWillPopScope,
+      child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Color.fromARGB(255, 29, 73, 219),
-          title: Text(
-            'Registro',
-            style: TextStyle(fontSize: 28),
-          ),
-          centerTitle: true,
+          title: Text("Guardar"),
         ),
-        body: Padding(
-          padding: EdgeInsets.all(10),
-          child: ListView(
-            children: [
-              Row(children: [
-                _textoNombre(context),
-                _textoNombre2(context),
-              ]),
-              const SizedBox(
-                height: 10,
-              ),
-              Row(
-                children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.47,
-                    child: _nombre(),
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.47,
-                    child: _nombre2(),
-                  ),
-                ],
-              ),
-              Row(children: [
-                _textoApellido(context),
-                _textoApellido2(context),
-              ]),
-              const SizedBox(
-                height: 10,
-              ),
-              Row(
-                children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.47,
-                    child: _Apellido(),
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.47,
-                    child: _apellido2(),
-                  ),
-                ],
-              ),
-              _textoCorreo(context),
-              SizedBox(
-                height: 10,
-              ),
-              _correo(),
-              Row(children: [
-                _textoceldula(context),
-                _textTelefono(context),
-              ]),
-              Row(
-                children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.47,
-                    child: _Cedula(),
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.47,
-                    child: _telefono(),
-                  ),
-                ],
-              ),
-              _textoUsuario(context),
-              SizedBox(
-                height: 10,
-              ),
-              _userName(),
-              _textoPassword(context),
-              SizedBox(
-                height: 10,
-              ),
-              _Password(),
-              _textoDescrip(context),
-              SizedBox(
-                height: 10,
-              ),
-              _descrip(),
-              SizedBox(
-                height: 10,
-              ),
-              MaterialButton(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  color: Color.fromARGB(255, 29, 73, 219),
-                  child: Text(
-                    'Mostrar segunda pantalla',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  onPressed: () {
-                    _showSecondPage(context);
-                  }),
-            ],
-          ),
-        ));
+        body: Container(
+          child: _buildForm(note),
+        ),
+      ),
+    );
+  }
+
+  _init(Note note) {
+    NombreController.text = note.nombre;
+    Nombre2Controller.text = note.edad;
+    apellidoController.text = note.telefono;
+    apellido2Controller.text = note.correo;
+    CorreoController.text = note.fecha;
+  }
+
+  Widget _buildForm(Note note) {
+    return Container(
+      padding: EdgeInsets.all(15),
+      child: Form(
+        key: _formKey,
+        child: ListView(
+          children: <Widget>[
+            Row(children: [
+              _textoNombre(context),
+              _textoNombre2(context),
+            ]),
+            const SizedBox(
+              height: 15,
+            ),
+            Row(
+              children: [
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.47,
+                  child: _nombre(),
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.47,
+                  child: _nombre2(),
+                ),
+              ],
+            ),
+            Row(children: [
+              _textoApellido(context),
+              _textoApellido2(context),
+            ]),
+            const SizedBox(
+              height: 10,
+            ),
+            Row(
+              children: [
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.47,
+                  child: _Apellido(),
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.47,
+                  child: _apellido2(),
+                ),
+              ],
+            ),
+            _textoCorreo(context),
+            SizedBox(
+              height: 10,
+            ),
+            _correo(),
+            const SizedBox(
+              height: 10,
+            ),
+            MaterialButton(
+              child: Text("Guardar"),
+              color: Colors.blue,
+              onPressed: () {
+                if (_formKey.currentState!.validate()) {
+                  if (note.id > 0) {
+                    // actualizacion
+                    note.nombre = NombreController.text;
+                    note.edad = Nombre2Controller.text;
+                    note.telefono = apellidoController.text;
+                    note.correo = apellido2Controller.text;
+                    note.fecha = CorreoController.text;
+                    Operation.update(note);
+                  } else {
+                    // insercion
+                    Operation.insert(Note(
+                      nombre: NombreController.text,
+                      edad: Nombre2Controller.text,
+                      telefono: apellidoController.text,
+                      correo: apellido2Controller.text,
+                      fecha: CorreoController.text,
+                    ));
+                  }
+                }
+              },
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Future<bool> _onWillPopScope() async {
+    return (await showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+                  title: Text('¿Seguro que quieres salir del formulario? '),
+                  content: Text('Tienes datos sin guardar'),
+                  actions: [
+                    MaterialButton(
+                        onPressed: () => Navigator.of(context).pop(false),
+                        child: Text('No')),
+                    MaterialButton(
+                        onPressed: () => Navigator.of(context).pop(true),
+                        child: Text('Si'))
+                  ],
+                ))) ??
+        false;
+  }
+
+  Container _textoNombre(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.fromLTRB(15, 15, 0, 0),
+      width: MediaQuery.of(context).size.width * 0.47,
+      child: const Text('Primer nombre: ',
+          style: TextStyle(
+              fontSize: 20,
+              color: Color.fromARGB(255, 0, 51, 78),
+              fontWeight: FontWeight.bold)),
+    );
+  }
+
+  Container _textoNombre2(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.fromLTRB(15, 15, 0, 0),
+      width: MediaQuery.of(context).size.width * 0.47,
+      child: const Text('Segundo nombre: ',
+          style: TextStyle(
+              fontSize: 20,
+              color: Color.fromARGB(255, 0, 51, 78),
+              fontWeight: FontWeight.bold)),
+    );
+  }
+
+  Container _textoApellido(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.fromLTRB(15, 15, 0, 0),
+      width: MediaQuery.of(context).size.width * 0.47,
+      child: const Text('Primer Apellido: ',
+          style: TextStyle(
+              fontSize: 20,
+              color: Color.fromARGB(255, 0, 51, 78),
+              fontWeight: FontWeight.bold)),
+    );
+  }
+
+  Container _textoApellido2(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.fromLTRB(15, 15, 0, 0),
+      width: MediaQuery.of(context).size.width * 0.47,
+      child: const Text('Segundo Apellido: ',
+          style: TextStyle(
+              fontSize: 20,
+              color: Color.fromARGB(255, 0, 51, 78),
+              fontWeight: FontWeight.bold)),
+    );
   }
 
   Container _textoCorreo(BuildContext context) {
@@ -142,115 +226,6 @@ class _MyHomeState extends State<MyHome> {
     );
   }
 
-  Container _textoNombre2(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.fromLTRB(15, 15, 0, 0),
-      width: MediaQuery.of(context).size.width * 0.47,
-      child: const Text('Segundo nombre: ',
-          style: TextStyle(
-              fontSize: 21,
-              color: Color.fromARGB(255, 0, 51, 78),
-              fontWeight: FontWeight.bold)),
-    );
-  }
-
-  Container _textoNombre(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.fromLTRB(15, 15, 0, 0),
-      width: MediaQuery.of(context).size.width * 0.47,
-      child: const Text('Primer Nombre: ',
-          style: TextStyle(
-              fontSize: 21,
-              color: Color.fromARGB(255, 0, 51, 78),
-              fontWeight: FontWeight.bold)),
-    );
-  }
-
-  Container _textoApellido(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.fromLTRB(15, 15, 0, 0),
-      width: MediaQuery.of(context).size.width * 0.47,
-      child: const Text('Primer Apellido: ',
-          style: TextStyle(
-              fontSize: 21,
-              color: Color.fromARGB(255, 0, 51, 78),
-              fontWeight: FontWeight.bold)),
-    );
-  }
-
-  Container _textoApellido2(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.fromLTRB(15, 15, 0, 0),
-      width: MediaQuery.of(context).size.width * 0.47,
-      child: const Text('Segundo Apellido: ',
-          style: TextStyle(
-              fontSize: 21,
-              color: Color.fromARGB(255, 0, 51, 78),
-              fontWeight: FontWeight.bold)),
-    );
-  }
-
-  Container _textTelefono(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.fromLTRB(15, 15, 0, 0),
-      width: MediaQuery.of(context).size.width * 0.47,
-      child: const Text('Telefono: ',
-          style: TextStyle(
-              fontSize: 21,
-              color: Color.fromARGB(255, 0, 51, 78),
-              fontWeight: FontWeight.bold)),
-    );
-  }
-
-  Container _textoceldula(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.fromLTRB(15, 15, 0, 0),
-      width: MediaQuery.of(context).size.width * 0.47,
-      child: const Text('Cedula: ',
-          style: TextStyle(
-              fontSize: 21,
-              color: Color.fromARGB(255, 0, 51, 78),
-              fontWeight: FontWeight.bold)),
-    );
-  }
-
-  Container _textoUsuario(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.fromLTRB(15, 15, 0, 0),
-      width: MediaQuery.of(context).size.width * 0.47,
-      child: const Text('UserName: ',
-          style: TextStyle(
-              fontSize: 21,
-              color: Color.fromARGB(255, 0, 51, 78),
-              fontWeight: FontWeight.bold)),
-    );
-  }
-
-  Container _textoPassword(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.fromLTRB(15, 15, 0, 0),
-      width: MediaQuery.of(context).size.width * 0.47,
-      child: const Text('Pasword: ',
-          style: TextStyle(
-              fontSize: 21,
-              color: Color.fromARGB(255, 0, 51, 78),
-              fontWeight: FontWeight.bold)),
-    );
-  }
-
-  Container _textoDescrip(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.fromLTRB(15, 15, 0, 0),
-      width: MediaQuery.of(context).size.width * 0.47,
-      child: const Text('Descripcion: ',
-          style: TextStyle(
-              fontSize: 21,
-              color: Color.fromARGB(255, 0, 51, 78),
-              fontWeight: FontWeight.bold)),
-    );
-  }
-
-//inpusttt
   Container _nombre() {
     return Container(
         decoration: BoxDecoration(
@@ -262,7 +237,13 @@ class _MyHomeState extends State<MyHome> {
         padding: const EdgeInsets.symmetric(horizontal: 10),
         margin: const EdgeInsets.symmetric(horizontal: 10),
         child: TextFormField(
-          controller: nombrec,
+          validator: (value) {
+            if (value!.isEmpty) {
+              return "Tiene que colocar un telefono";
+            }
+            return null;
+          },
+          controller: NombreController,
           maxLines: 1,
           style: const TextStyle(
             fontSize: 20,
@@ -283,12 +264,19 @@ class _MyHomeState extends State<MyHome> {
         padding: const EdgeInsets.symmetric(horizontal: 10),
         margin: const EdgeInsets.symmetric(horizontal: 10),
         child: TextFormField(
-          controller: nombre2c,
+          validator: (value) {
+            if (value!.isEmpty) {
+              return "Tiene que colocar un telefono";
+            }
+            return null;
+          },
+          controller: Nombre2Controller,
+          maxLines: 1,
           style: const TextStyle(
             fontSize: 20,
           ),
           decoration:
-              const InputDecoration(border: InputBorder.none, hintText: ' '),
+              const InputDecoration(border: InputBorder.none, hintText: ''),
         ));
   }
 
@@ -303,7 +291,13 @@ class _MyHomeState extends State<MyHome> {
         padding: const EdgeInsets.symmetric(horizontal: 10),
         margin: const EdgeInsets.symmetric(horizontal: 10),
         child: TextFormField(
-          controller: apellidoc,
+          validator: (value) {
+            if (value!.isEmpty) {
+              return "Tiene que colocar un telefono";
+            }
+            return null;
+          },
+          controller: apellidoController,
           maxLines: 1,
           style: const TextStyle(
             fontSize: 20,
@@ -324,7 +318,13 @@ class _MyHomeState extends State<MyHome> {
         padding: const EdgeInsets.symmetric(horizontal: 10),
         margin: const EdgeInsets.symmetric(horizontal: 10),
         child: TextFormField(
-          controller: apellido2c,
+          validator: (value) {
+            if (value!.isEmpty) {
+              return "Tiene que colocar un telefono";
+            }
+            return null;
+          },
+          controller: apellido2Controller,
           style: const TextStyle(
             fontSize: 20,
           ),
@@ -344,7 +344,13 @@ class _MyHomeState extends State<MyHome> {
         padding: const EdgeInsets.symmetric(horizontal: 10),
         margin: const EdgeInsets.symmetric(horizontal: 10),
         child: TextFormField(
-          controller: correc,
+          validator: (value) {
+            if (value!.isEmpty) {
+              return "Tiene que colocar un telefono";
+            }
+            return null;
+          },
+          controller: CorreoController,
           maxLines: 1,
           style: const TextStyle(
             fontSize: 20,
@@ -352,131 +358,5 @@ class _MyHomeState extends State<MyHome> {
           decoration:
               const InputDecoration(border: InputBorder.none, hintText: ' '),
         ));
-  }
-
-  Container _Cedula() {
-    return Container(
-        decoration: BoxDecoration(
-            border: Border.all(
-              color: Color.fromARGB(255, 200, 202, 204),
-              width: 3,
-            ),
-            borderRadius: BorderRadius.circular(7)),
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        margin: const EdgeInsets.symmetric(horizontal: 10),
-        child: TextFormField(
-          controller: cedulac,
-          maxLines: 1,
-          style: const TextStyle(
-            fontSize: 20,
-          ),
-          decoration:
-              const InputDecoration(border: InputBorder.none, hintText: ''),
-        ));
-  }
-
-  Container _telefono() {
-    return Container(
-        decoration: BoxDecoration(
-            border: Border.all(
-              color: Color.fromARGB(255, 200, 202, 204),
-              width: 3,
-            ),
-            borderRadius: BorderRadius.circular(7)),
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        margin: const EdgeInsets.symmetric(horizontal: 10),
-        child: TextFormField(
-          controller: telefonc,
-          maxLines: 1,
-          style: const TextStyle(
-            fontSize: 20,
-          ),
-          decoration:
-              const InputDecoration(border: InputBorder.none, hintText: ''),
-        ));
-  }
-
-  Container _userName() {
-    return Container(
-        decoration: BoxDecoration(
-            border: Border.all(
-              color: Color.fromARGB(255, 200, 202, 204),
-              width: 3,
-            ),
-            borderRadius: BorderRadius.circular(7)),
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        margin: const EdgeInsets.symmetric(horizontal: 10),
-        child: TextFormField(
-          controller: usuarioc,
-          maxLines: 1,
-          style: const TextStyle(
-            fontSize: 20,
-          ),
-          decoration:
-              const InputDecoration(border: InputBorder.none, hintText: ''),
-        ));
-  }
-
-  Container _Password() {
-    return Container(
-        decoration: BoxDecoration(
-            border: Border.all(
-              color: Color.fromARGB(255, 200, 202, 204),
-              width: 3,
-            ),
-            borderRadius: BorderRadius.circular(7)),
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        margin: const EdgeInsets.symmetric(horizontal: 10),
-        child: TextFormField(
-          controller: contrasenac,
-          maxLines: 1,
-          style: const TextStyle(
-            fontSize: 20,
-          ),
-          decoration:
-              const InputDecoration(border: InputBorder.none, hintText: ''),
-        ));
-  }
-
-  Container _descrip() {
-    return Container(
-        decoration: BoxDecoration(
-            border: Border.all(
-              color: Color.fromARGB(255, 200, 202, 204),
-              width: 3,
-            ),
-            borderRadius: BorderRadius.circular(7)),
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        margin: const EdgeInsets.symmetric(horizontal: 10),
-        child: TextFormField(
-          controller: descripcionc,
-          maxLines: 5,
-          maxLength: 200,
-          style: const TextStyle(
-            fontSize: 20,
-          ),
-          decoration:
-              const InputDecoration(border: InputBorder.none, hintText: ''),
-        ));
-  }
-
-  void _showSecondPage(BuildContext context) {
-    Navigator.of(context).pushNamed("/second",
-        arguments: SecondPageArguments(
-            nombre: nombrec.text,
-            nombre2: nombre2c.text,
-            apellido: apellidoc.text,
-            apellido2: apellido2c.text,
-            correo: correc.text,
-            cedula: cedulac.text,
-            telefono: telefonc.text,
-            usuario: usuarioc.text,
-            contrasena: contrasenac.text,
-            descripcion: descripcionc.text));
-  }
-
-  @override
-  void initState() {
-    super.initState();
   }
 }

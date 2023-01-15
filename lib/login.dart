@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Search.dart';
+import 'package:flutter_application_1/formulario/datos.dart';
 import 'package:flutter_application_1/formulario/form.dart';
-import 'package:flutter_application_1/search.dart';
+import 'package:flutter_application_1/formulario/muestraDatos.dart';
+import 'package:flutter_application_1/formulario/operaciones.dart';
 
 class Home extends StatefulWidget {
-  const Home({super.key});
+  static const String ROUTE = "/";
 
   @override
   State<Home> createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
+  List<Note> notes = [];
   final _formKey = GlobalKey<FormState>();
   bool _loading = false;
 
@@ -100,12 +104,17 @@ class _HomeState extends State<Home> {
                           selectionColor: Color.fromARGB(255, 29, 73, 219),
                         ),
                         onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: ((context) => MyHome())));
+                          Navigator.pushNamed(context, SavePage.ROUTE,
+                                  arguments: Note.empty())
+                              .then((value) => setState(
+                                    () {
+                                      _loadData();
+                                    },
+                                  ));
                         },
-                      )
+                      ),
                     ],
-                  )
+                  ),
                 ],
               ),
             ),
@@ -122,5 +131,13 @@ class _HomeState extends State<Home> {
         _loading = true;
       });
     }
+  }
+
+  _loadData() async {
+    List<Note> auxNote = await Operation.notes();
+
+    setState(() {
+      notes = auxNote;
+    });
   }
 }

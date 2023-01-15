@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/formulario/datos.dart';
+
 import 'package:flutter_application_1/formulario/form.dart';
+import 'package:flutter_application_1/formulario/muestraDatos.dart';
 import 'package:flutter_application_1/login.dart';
 import 'search.dart';
 
@@ -15,10 +16,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: "/",
+      initialRoute: Home.ROUTE,
       routes: {
-        "/": (BuildContext context) => Home(),
-        "/second": (BuildContext context) => SegundaPage(),
+        Home.ROUTE: (_) => Home(),
+        SavePage.ROUTE: (_) => SavePage(),
+        ListPage.ROUTE: (_) => ListPage()
       },
     );
   }

@@ -1,7 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/formulario/datos.dart';
 import 'package:flutter_application_1/formulario/form.dart';
+import 'package:flutter_application_1/formulario/muestraDatos.dart';
 import 'package:flutter_application_1/login.dart';
 
 class search extends StatefulWidget {
@@ -41,7 +40,7 @@ class _searchState extends State<search> {
                 child: MaterialButton(
                   onPressed: () {
                     Navigator.of(context).push(
-                        MaterialPageRoute(builder: ((context) => search())));
+                        MaterialPageRoute(builder: ((context) => Home())));
                   },
                   padding:
                       const EdgeInsets.symmetric(horizontal: 122, vertical: 18),
@@ -61,8 +60,8 @@ class _searchState extends State<search> {
               Container(
                 child: MaterialButton(
                   onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: ((context) => SegundaPage())));
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: ((context) => ListPage())));
                   },
                   padding:
                       const EdgeInsets.symmetric(horizontal: 122, vertical: 18),
