@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_application_1/formulario/datos.dart';
 import 'package:flutter_application_1/formulario/operaciones.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-import 'package:quickalert/models/quickalert_type.dart';
-import 'package:quickalert/widgets/quickalert_dialog.dart';
+import 'package:quickalert/quickalert.dart';
 
 class SavePage extends StatefulWidget {
   static const String ROUTE = "/save";
@@ -63,14 +61,16 @@ class _SavePageState extends State<SavePage> {
     Note note = ModalRoute.of(context)!.settings.arguments as Note;
     _init(note);
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(" Registro"),
-        backgroundColor: Color.fromARGB(255, 29, 73, 219),
-        centerTitle: true,
-      ),
-      body: Container(
-        child: _buildForm(note),
+    return WillPopScope(
+      onWillPop: _onWillPopScope,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("Guardar"),
+          backgroundColor: Color.fromARGB(255, 29, 73, 219),
+        ),
+        body: Container(
+          child: _buildForm(note),
+        ),
       ),
     );
   }
@@ -133,67 +133,57 @@ class _SavePageState extends State<SavePage> {
               height: 10,
             ),
             _correo(),
-            SizedBox(
-              height: 10,
-            ),
-            SizedBox(
-              height: 10,
-            ),
             const SizedBox(
-              height: 100,
+              height: 10,
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Ink(
-                  padding: EdgeInsets.all(4),
-                  decoration: const ShapeDecoration(
-                    color: Color.fromARGB(255, 29, 73, 219),
-                    shape: CircleBorder(),
-                  ),
-                  child: IconButton(
-                    iconSize: 35,
-                    highlightColor: Colors.red,
-                    icon: const Icon(Icons.save),
-                    color: Colors.white,
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        if (note.id > 0) {
-                          // actualizacion
-
-                          note.nombre = NombreController.text;
-                          note.edad = Nombre2Controller.text;
-                          note.telefono = apellidoController.text;
-                          note.correo = apellido2Controller.text;
-                          note.fecha = CorreoController.text;
-
-                          Operation.update(note);
-                        } else {
-                          // insercion
-
-                          Operation.insert(Note(
-                            nombre: NombreController.text,
-                            edad: Nombre2Controller.text,
-                            telefono: apellidoController.text,
-                            correo: apellido2Controller.text,
-                            fecha: CorreoController.text,
-                          ));
-                        }
-                        showAlert(QuickAlertType.confirm);
-                      } else {
-                        showAlertt(QuickAlertType.error);
-                      }
-                    },
-                  ),
-                ),
-                Text('Guardar'),
-              ],
+            MaterialButton(
+              child: Text("Guardar"),
+              color: Color.fromARGB(255, 29, 73, 219),
+              onPressed: () {
+                if (_formKey.currentState!.validate()) {
+                  if (note.id > 0) {
+                    // actualizacion
+                    note.nombre = NombreController.text;
+                    note.edad = Nombre2Controller.text;
+                    note.telefono = apellidoController.text;
+                    note.correo = apellido2Controller.text;
+                    note.fecha = CorreoController.text;
+                    Operation.update(note);
+                  } else {
+                    // insercion
+                    Operation.insert(Note(
+                      nombre: NombreController.text,
+                      edad: Nombre2Controller.text,
+                      telefono: apellidoController.text,
+                      correo: apellido2Controller.text,
+                      fecha: CorreoController.text,
+                    ));
+                  }
+                  showAlert(QuickAlertType.confirm);
+                }
+              },
             )
           ],
         ),
       ),
     );
+  }
+
+  Future<bool> _onWillPopScope() async {
+    return (await showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+                  title: Text('¿Salir del Registro? '),
+                  actions: [
+                    MaterialButton(
+                        onPressed: () => Navigator.of(context).pop(false),
+                        child: Text('No')),
+                    MaterialButton(
+                        onPressed: () => Navigator.of(context).pop(true),
+                        child: Text('Si'))
+                  ],
+                ))) ??
+        false;
   }
 
   Container _textoNombre(BuildContext context) {
@@ -269,7 +259,7 @@ class _SavePageState extends State<SavePage> {
         child: TextFormField(
           validator: (value) {
             if (value!.isEmpty) {
-              return "Tiene que colocar un nombre";
+              return "Tiene que colocar un telefono";
             }
             return null;
           },
@@ -296,7 +286,7 @@ class _SavePageState extends State<SavePage> {
         child: TextFormField(
           validator: (value) {
             if (value!.isEmpty) {
-              return "Tiene que colocar un nombre";
+              return "Tiene que colocar un telefono";
             }
             return null;
           },
@@ -323,7 +313,7 @@ class _SavePageState extends State<SavePage> {
         child: TextFormField(
           validator: (value) {
             if (value!.isEmpty) {
-              return "Tiene que colocar un apellido";
+              return "Tiene que colocar un telefono";
             }
             return null;
           },
@@ -350,7 +340,7 @@ class _SavePageState extends State<SavePage> {
         child: TextFormField(
           validator: (value) {
             if (value!.isEmpty) {
-              return "Tiene que colocar un apellido";
+              return "Tiene que colocar un telefono";
             }
             return null;
           },
@@ -376,7 +366,7 @@ class _SavePageState extends State<SavePage> {
         child: TextFormField(
           validator: (value) {
             if (value!.isEmpty) {
-              return "Tiene que colocar un correo";
+              return "Tiene que colocar un telefono";
             }
             return null;
           },
