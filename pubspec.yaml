@@ -49,6 +49,7 @@ dependencies:
   # format dates for invoice
   intl: ^0.17.0
   provider: ^6.0.5
+  quickalert: ^1.0.1
 
 dev_dependencies:
   flutter_test:

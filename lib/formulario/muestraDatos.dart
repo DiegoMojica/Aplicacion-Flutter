@@ -44,7 +44,9 @@ class __MyListState extends State<_MyList> {
         },
       ),
       appBar: AppBar(
-        title: Text("Listado"),
+        title: Text("Registros"),
+        backgroundColor: Color.fromARGB(255, 29, 73, 219),
+        centerTitle: true,
       ),
       body: Container(
         child: ListView.builder(
@@ -90,7 +92,10 @@ class __MyListState extends State<_MyList> {
                         },
                       ));
             },
-            child: const Icon(Icons.edit)),
+            child: const Icon(
+              Icons.edit,
+              color: Color.fromARGB(255, 29, 73, 219),
+            )),
       ),
     );
   }

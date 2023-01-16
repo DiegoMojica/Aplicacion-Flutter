@@ -10,7 +10,7 @@ class Operation {
     return openDatabase(join(await getDatabasesPath(), 'note.db'),
         onCreate: (db, version) {
       return db.execute(
-        "CREATE TABLE note (id INTEGER PRIMARY KEY, nombre TEXT, edad TEXT, telefono TEXT, correo TEXT, fecha TEXT)",
+        "CREATE TABLE note (id INTEGER PRIMARY KEY, nombre TEXT, edad TEXT, telefono TEXT, correo TEXT, fecha TEXT, )",
       );
     }, version: 1);
   }
