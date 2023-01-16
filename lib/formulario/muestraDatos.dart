@@ -34,6 +34,7 @@ class __MyListState extends State<_MyList> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
+        backgroundColor: Color.fromARGB(255, 29, 73, 219),
         onPressed: () {
           Navigator.pushNamed(context, SavePage.ROUTE, arguments: Note.empty())
               .then((value) => setState(
@@ -84,18 +85,26 @@ class __MyListState extends State<_MyList> {
       child: ListTile(
         title: Text(notes[i].nombre),
         trailing: MaterialButton(
-            onPressed: () {
-              Navigator.pushNamed(context, SavePage.ROUTE, arguments: notes[i])
-                  .then((value) => setState(
-                        () {
-                          _loadData();
-                        },
-                      ));
-            },
-            child: const Icon(
-              Icons.edit,
-              color: Color.fromARGB(255, 29, 73, 219),
-            )),
+          onPressed: () {
+            Navigator.pushNamed(context, SavePage.ROUTE, arguments: notes[i])
+                .then((value) => setState(
+                      () {
+                        _loadData();
+                      },
+                    ));
+          },
+          child: Ink(
+              padding: EdgeInsets.all(5),
+              decoration: const ShapeDecoration(
+                color: Color.fromARGB(255, 29, 73, 219),
+                shape: CircleBorder(),
+              ),
+              child: const Icon(
+                Icons.edit,
+                size: 20,
+                color: Colors.white,
+              )),
+        ),
       ),
     );
   }
