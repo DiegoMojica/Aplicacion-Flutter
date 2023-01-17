@@ -1,18 +1,26 @@
 class Note {
   int id = 0;
+  String novedad = "";
+  String codigo = "";
   String nombre = "";
-  String edad = "";
-  String telefono = "";
+  String codDescrip = "";
+  String cargo = "";
+  String depenD = "";
   String correo = "";
-  String fecha = "";
+  String codOper = "";
+  String operResp = "";
 
   Note({
     this.id = 0,
+    required this.novedad,
+    required this.codigo,
     required this.nombre,
-    required this.edad,
-    required this.telefono,
+    required this.codDescrip,
+    required this.cargo,
+    required this.depenD,
     required this.correo,
-    required this.fecha,
+    required this.codOper,
+    required this.operResp,
   });
 
   Note.empty();
@@ -20,19 +28,27 @@ class Note {
   Map<String, dynamic> toMap() {
     return id == 0
         ? {
+            'novedad': novedad,
+            'codigo': codigo,
             'nombre': nombre,
-            'edad': edad,
-            'telefono': telefono,
+            'codDescrip': codDescrip,
+            'cargo': cargo,
+            'depenD': depenD,
             'correo': correo,
-            'fecha': fecha,
+            'codOper': codOper,
+            'operResp': operResp,
           }
         : {
             'id': id,
+            'novead': novedad,
+            'codigo': codigo,
             'nombre': nombre,
-            'edad': edad,
-            'telefono': telefono,
+            'codDescrip': codDescrip,
+            'cargo': cargo,
+            'telefono': depenD,
             'correo': correo,
-            'fecha': fecha,
+            'codOper': codOper,
+            'operResp': operResp,
           };
   }
 }

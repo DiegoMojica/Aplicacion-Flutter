@@ -83,7 +83,7 @@ class __MyListState extends State<_MyList> {
         Operation.delete(notes[i]);
       },
       child: ListTile(
-        title: Text(notes[i].nombre),
+        title: Text(notes[i].novedad),
         trailing: MaterialButton(
           onPressed: () {
             Navigator.pushNamed(context, SavePage.ROUTE, arguments: notes[i])
