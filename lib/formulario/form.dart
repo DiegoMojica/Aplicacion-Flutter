@@ -91,16 +91,20 @@ class _SavePageState extends State<SavePage> {
               height: 10,
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.47,
+                  width: MediaQuery.of(context).size.width * 0.4,
                   height: MediaQuery.of(context).size.width * 0.09,
                   child: _Novedad(),
                 ),
                 SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.40,
-                  height: MediaQuery.of(context).size.width * 0.09,
-                  child: _codigo(),
+                    width: MediaQuery.of(context).size.width * 0.4,
+                    height: MediaQuery.of(context).size.width * 0.09,
+                    child: _codigo()),
+                SizedBox(
+                  width: 40,
+                  child: botonCodigo(),
                 ),
               ],
             ),
@@ -114,15 +118,22 @@ class _SavePageState extends State<SavePage> {
               child: _Nombre(),
             ),
             _textocodDescrip(context),
+            const SizedBox(
+              height: 10,
+            ),
             Row(
               children: [
                 SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.47,
+                  width: MediaQuery.of(context).size.width * 0.43,
                   height: MediaQuery.of(context).size.width * 0.09,
                   child: _codDescrip(),
                 ),
                 SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.45,
+                  width: 40,
+                  child: botonCodigo(),
+                ),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.34,
                   height: MediaQuery.of(context).size.width * 0.09,
                   child: _depenD(),
                 ),
@@ -147,12 +158,16 @@ class _SavePageState extends State<SavePage> {
             Row(
               children: [
                 SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.47,
+                  width: MediaQuery.of(context).size.width * 0.45,
                   height: MediaQuery.of(context).size.width * 0.09,
                   child: _codOper(),
                 ),
                 SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.45,
+                  width: 40,
+                  child: botonCodigo(),
+                ),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.35,
                   height: MediaQuery.of(context).size.width * 0.09,
                   child: _operResp(),
                 ),
@@ -347,46 +362,47 @@ class _SavePageState extends State<SavePage> {
 
   Container _codigo() {
     return Container(
-        decoration: BoxDecoration(
-            border: Border.all(
-              color: const Color.fromARGB(255, 200, 202, 204),
-              width: 3,
-            ),
-            borderRadius: BorderRadius.circular(7)),
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        margin: const EdgeInsets.symmetric(horizontal: 30),
-        child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-          Expanded(
-            child: TextFormField(
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return "Tiene que colocar un telefono";
-                }
-                return null;
-              },
-              controller: codigoc,
-              style: const TextStyle(
-                fontSize: 14,
-              ),
-              decoration: const InputDecoration(
-                  border: InputBorder.none, hintText: ' '),
-            ),
+      decoration: BoxDecoration(
+          border: Border.all(
+            color: const Color.fromARGB(255, 200, 202, 204),
+            width: 3,
           ),
-          Expanded(
-              child: Ink(
-                  decoration: const ShapeDecoration(
-                      color: Color.fromARGB(255, 29, 73, 219),
-                      shape: CircleBorder()),
-                  child: Transform(
-                    transform: Matrix4.rotationY(3.6),
-                    alignment: Alignment.topCenter,
-                    child: IconButton(
-                        padding: const EdgeInsets.all(0.20),
-                        color: const Color.fromARGB(255, 200, 202, 204),
-                        icon: const Icon(Icons.search),
-                        onPressed: (() {})),
-                  )))
-        ]));
+          borderRadius: BorderRadius.circular(7)),
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      margin: const EdgeInsets.symmetric(horizontal: 30),
+      child: Expanded(
+        child: TextFormField(
+          validator: (value) {
+            if (value!.isEmpty) {
+              return "Tiene que colocar un telefono";
+            }
+            return null;
+          },
+          controller: codigoc,
+          style: const TextStyle(
+            fontSize: 14,
+          ),
+          decoration:
+              const InputDecoration(border: InputBorder.none, hintText: ' '),
+        ),
+      ),
+    );
+  }
+
+  Container botonCodigo() {
+    return Container(
+        child: Ink(
+            decoration: const ShapeDecoration(
+                color: Color.fromARGB(255, 29, 73, 219), shape: CircleBorder()),
+            child: Transform(
+              transform: Matrix4.rotationY(3.6),
+              alignment: Alignment.topCenter,
+              child: IconButton(
+                  padding: const EdgeInsets.all(0.20),
+                  color: const Color.fromARGB(255, 200, 202, 204),
+                  icon: const Icon(Icons.search),
+                  onPressed: (() {})),
+            )));
   }
 
   Container _Nombre() {
@@ -442,22 +458,24 @@ class _SavePageState extends State<SavePage> {
               decoration: const InputDecoration(
                   border: InputBorder.none, hintText: ' '),
             ),
-          ),
-          Expanded(
-              child: Ink(
-            decoration: const ShapeDecoration(
-                color: Color.fromARGB(255, 29, 73, 219), shape: CircleBorder()),
-            child: Transform(
-              transform: Matrix4.rotationY(3.6),
-              alignment: Alignment.topCenter,
-              child: IconButton(
-                  padding: const EdgeInsets.all(0.20),
-                  color: const Color.fromARGB(255, 200, 202, 204),
-                  icon: const Icon(Icons.search),
-                  onPressed: (() {})),
-            ),
-          ))
+          )
         ]));
+  }
+
+  Ink bottonDescrip() {
+    return Ink(
+      decoration: const ShapeDecoration(
+          color: Color.fromARGB(255, 29, 73, 219), shape: CircleBorder()),
+      child: Transform(
+        transform: Matrix4.rotationY(3.6),
+        alignment: Alignment.topCenter,
+        child: IconButton(
+            padding: const EdgeInsets.all(0.20),
+            color: const Color.fromARGB(255, 200, 202, 204),
+            icon: const Icon(Icons.search),
+            onPressed: (() {})),
+      ),
+    );
   }
 
   Container _depenD() {
@@ -597,20 +615,22 @@ class _SavePageState extends State<SavePage> {
                   border: InputBorder.none, hintText: ' '),
             ),
           ),
-          Expanded(
-              child: Ink(
-            decoration: const ShapeDecoration(
-                color: Color.fromARGB(255, 29, 73, 219), shape: CircleBorder()),
-            child: Transform(
-              transform: Matrix4.rotationY(3.6),
-              alignment: Alignment.topCenter,
-              child: IconButton(
-                  padding: const EdgeInsets.all(0.20),
-                  color: const Color.fromARGB(255, 200, 202, 204),
-                  icon: const Icon(Icons.search),
-                  onPressed: (() {})),
-            ),
-          ))
         ]));
+  }
+
+  Ink bottonoperador() {
+    return Ink(
+      decoration: const ShapeDecoration(
+          color: Color.fromARGB(255, 29, 73, 219), shape: CircleBorder()),
+      child: Transform(
+        transform: Matrix4.rotationY(3.6),
+        alignment: Alignment.topCenter,
+        child: IconButton(
+            padding: const EdgeInsets.all(0.20),
+            color: const Color.fromARGB(255, 200, 202, 204),
+            icon: const Icon(Icons.search),
+            onPressed: (() {})),
+      ),
+    );
   }
 }
