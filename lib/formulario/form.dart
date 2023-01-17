@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_application_1/formulario/datos.dart';
 import 'package:flutter_application_1/formulario/operaciones.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-import 'package:quickalert/quickalert.dart';
+import 'package:quickalert/models/quickalert_type.dart';
+import 'package:quickalert/widgets/quickalert_dialog.dart';
 
 class SavePage extends StatefulWidget {
   static const String ROUTE = "/save";
@@ -53,12 +55,7 @@ class _SavePageState extends State<SavePage> {
       onWillPop: _onWillPopScope,
       child: Scaffold(
         appBar: AppBar(
-<<<<<<< HEAD
           title: const Text("Guardar"),
-=======
-          title: Text("Guardar"),
-          backgroundColor: Color.fromARGB(255, 29, 73, 219),
->>>>>>> 024ee6a3aab1a0816eb4bf7f358dae953f195044
         ),
         body: Container(
           child: _buildForm(note),
@@ -132,7 +129,6 @@ class _SavePageState extends State<SavePage> {
               ],
             ),
             _textoCorreo(context),
-<<<<<<< HEAD
             const SizedBox(
               height: 10,
             ),
@@ -165,23 +161,10 @@ class _SavePageState extends State<SavePage> {
             MaterialButton(
               child: Text("Guardar"),
               color: Colors.blue,
-=======
-            SizedBox(
-              height: 10,
-            ),
-            _correo(),
-            const SizedBox(
-              height: 10,
-            ),
-            MaterialButton(
-              child: Text("Guardar"),
-              color: Color.fromARGB(255, 29, 73, 219),
->>>>>>> 024ee6a3aab1a0816eb4bf7f358dae953f195044
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   if (note.id > 0) {
                     // actualizacion
-<<<<<<< HEAD
                     note.novedad = novedadc.text;
                     note.codigo = codigoc.text;
                     note.nombre = nombrec.text;
@@ -191,18 +174,10 @@ class _SavePageState extends State<SavePage> {
                     note.depenD = depenDc.text;
                     note.codOper = codOperc.text;
                     note.operResp = operRespc.text;
-=======
-                    note.nombre = NombreController.text;
-                    note.edad = Nombre2Controller.text;
-                    note.telefono = apellidoController.text;
-                    note.correo = apellido2Controller.text;
-                    note.fecha = CorreoController.text;
->>>>>>> 024ee6a3aab1a0816eb4bf7f358dae953f195044
                     Operation.update(note);
                   } else {
                     // insercion
                     Operation.insert(Note(
-<<<<<<< HEAD
                       novedad: novedadc.text,
                       codigo: codigoc.text,
                       nombre: nombrec.text,
@@ -214,16 +189,6 @@ class _SavePageState extends State<SavePage> {
                       operResp: operRespc.text,
                     ));
                   }
-=======
-                      nombre: NombreController.text,
-                      edad: Nombre2Controller.text,
-                      telefono: apellidoController.text,
-                      correo: apellido2Controller.text,
-                      fecha: CorreoController.text,
-                    ));
-                  }
-                  showAlert(QuickAlertType.confirm);
->>>>>>> 024ee6a3aab1a0816eb4bf7f358dae953f195044
                 }
               },
             )
@@ -237,79 +202,19 @@ class _SavePageState extends State<SavePage> {
     return (await showDialog(
             context: context,
             builder: (context) => AlertDialog(
-<<<<<<< HEAD
                   title: Text('¿Seguro que quieres salir del formulario? '),
                   content: Text('Tienes datos sin guardar'),
-=======
-                  title: Text('¿Salir del Registro? '),
->>>>>>> 024ee6a3aab1a0816eb4bf7f358dae953f195044
                   actions: [
                     MaterialButton(
                         onPressed: () => Navigator.of(context).pop(false),
                         child: Text('No')),
                     MaterialButton(
-<<<<<<< HEAD
                       onPressed: () => Navigator.of(context).pop(true),
                       child: Text('Si'),
                     )
                   ],
                 ))) ??
         false;
-=======
-                        onPressed: () => Navigator.of(context).pop(true),
-                        child: Text('Si'))
-                  ],
-                ))) ??
-        false;
-  }
-
-  Container _textoNombre(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.fromLTRB(15, 15, 0, 0),
-      width: MediaQuery.of(context).size.width * 0.47,
-      child: const Text('Primer nombre: ',
-          style: TextStyle(
-              fontSize: 20,
-              color: Color.fromARGB(255, 0, 51, 78),
-              fontWeight: FontWeight.bold)),
-    );
-  }
-
-  Container _textoNombre2(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.fromLTRB(15, 15, 0, 0),
-      width: MediaQuery.of(context).size.width * 0.47,
-      child: const Text('Segundo nombre: ',
-          style: TextStyle(
-              fontSize: 20,
-              color: Color.fromARGB(255, 0, 51, 78),
-              fontWeight: FontWeight.bold)),
-    );
-  }
-
-  Container _textoApellido(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.fromLTRB(15, 15, 0, 0),
-      width: MediaQuery.of(context).size.width * 0.47,
-      child: const Text('Primer Apellido: ',
-          style: TextStyle(
-              fontSize: 20,
-              color: Color.fromARGB(255, 0, 51, 78),
-              fontWeight: FontWeight.bold)),
-    );
-  }
-
-  Container _textoApellido2(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.fromLTRB(15, 15, 0, 0),
-      width: MediaQuery.of(context).size.width * 0.47,
-      child: const Text('Segundo Apellido: ',
-          style: TextStyle(
-              fontSize: 20,
-              color: Color.fromARGB(255, 0, 51, 78),
-              fontWeight: FontWeight.bold)),
-    );
->>>>>>> 024ee6a3aab1a0816eb4bf7f358dae953f195044
   }
 
   Container _textoCorreo(BuildContext context) {
@@ -578,62 +483,6 @@ class _SavePageState extends State<SavePage> {
         ));
   }
 
-<<<<<<< HEAD
-=======
-  Container _Apellido() {
-    return Container(
-        decoration: BoxDecoration(
-            border: Border.all(
-              color: Color.fromARGB(255, 200, 202, 204),
-              width: 3,
-            ),
-            borderRadius: BorderRadius.circular(7)),
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        margin: const EdgeInsets.symmetric(horizontal: 10),
-        child: TextFormField(
-          validator: (value) {
-            if (value!.isEmpty) {
-              return "Tiene que colocar un telefono";
-            }
-            return null;
-          },
-          controller: apellidoController,
-          maxLines: 1,
-          style: const TextStyle(
-            fontSize: 20,
-          ),
-          decoration:
-              const InputDecoration(border: InputBorder.none, hintText: ' '),
-        ));
-  }
-
-  Container _apellido2() {
-    return Container(
-        decoration: BoxDecoration(
-            border: Border.all(
-              color: Color.fromARGB(255, 200, 202, 204),
-              width: 3,
-            ),
-            borderRadius: BorderRadius.circular(7)),
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        margin: const EdgeInsets.symmetric(horizontal: 10),
-        child: TextFormField(
-          validator: (value) {
-            if (value!.isEmpty) {
-              return "Tiene que colocar un telefono";
-            }
-            return null;
-          },
-          controller: apellido2Controller,
-          style: const TextStyle(
-            fontSize: 20,
-          ),
-          decoration:
-              const InputDecoration(border: InputBorder.none, hintText: ' '),
-        ));
-  }
-
->>>>>>> 024ee6a3aab1a0816eb4bf7f358dae953f195044
   Container _correo() {
     return Container(
         decoration: BoxDecoration(
