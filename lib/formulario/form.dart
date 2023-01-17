@@ -92,12 +92,12 @@ class _SavePageState extends State<SavePage> {
             ),
             Row(
               children: [
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width * 0.47,
                   height: MediaQuery.of(context).size.width * 0.09,
                   child: _Novedad(),
                 ),
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width * 0.40,
                   height: MediaQuery.of(context).size.width * 0.09,
                   child: _codigo(),
@@ -108,7 +108,7 @@ class _SavePageState extends State<SavePage> {
             const SizedBox(
               height: 10,
             ),
-            Container(
+            SizedBox(
               width: MediaQuery.of(context).size.width * 0.47,
               height: MediaQuery.of(context).size.width * 0.09,
               child: _Nombre(),
@@ -116,12 +116,12 @@ class _SavePageState extends State<SavePage> {
             _textocodDescrip(context),
             Row(
               children: [
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width * 0.47,
                   height: MediaQuery.of(context).size.width * 0.09,
                   child: _codDescrip(),
                 ),
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width * 0.45,
                   height: MediaQuery.of(context).size.width * 0.09,
                   child: _depenD(),
@@ -132,13 +132,13 @@ class _SavePageState extends State<SavePage> {
             const SizedBox(
               height: 10,
             ),
-            Container(
+            SizedBox(
               width: MediaQuery.of(context).size.width * 0.47,
               height: MediaQuery.of(context).size.width * 0.09,
               child: _correo(),
             ),
             _textocargo(context),
-            Container(
+            SizedBox(
               width: MediaQuery.of(context).size.width * 0.47,
               height: MediaQuery.of(context).size.width * 0.09,
               child: _cargo(),
@@ -146,20 +146,22 @@ class _SavePageState extends State<SavePage> {
             _textooperResp(context),
             Row(
               children: [
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width * 0.47,
                   height: MediaQuery.of(context).size.width * 0.09,
                   child: _codOper(),
                 ),
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width * 0.45,
                   height: MediaQuery.of(context).size.width * 0.09,
                   child: _operResp(),
                 ),
               ],
             ),
+            const SizedBox(
+              height: 30,
+            ),
             MaterialButton(
-              child: Text("Guardar"),
               color: Colors.blue,
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
@@ -191,6 +193,7 @@ class _SavePageState extends State<SavePage> {
                   }
                 }
               },
+              child: const Text("Guardar"),
             )
           ],
         ),
@@ -202,15 +205,16 @@ class _SavePageState extends State<SavePage> {
     return (await showDialog(
             context: context,
             builder: (context) => AlertDialog(
-                  title: Text('¿Seguro que quieres salir del formulario? '),
-                  content: Text('Tienes datos sin guardar'),
+                  title:
+                      const Text('¿Seguro que quieres salir del formulario? '),
+                  content: const Text('Tienes datos sin guardar'),
                   actions: [
                     MaterialButton(
                         onPressed: () => Navigator.of(context).pop(false),
-                        child: Text('No')),
+                        child: const Text('No')),
                     MaterialButton(
                       onPressed: () => Navigator.of(context).pop(true),
-                      child: Text('Si'),
+                      child: const Text('Si'),
                     )
                   ],
                 ))) ??
@@ -318,7 +322,7 @@ class _SavePageState extends State<SavePage> {
     return Container(
         decoration: BoxDecoration(
             border: Border.all(
-              color: Color.fromARGB(255, 200, 202, 204),
+              color: const Color.fromARGB(255, 200, 202, 204),
               width: 4,
             ),
             borderRadius: BorderRadius.circular(7)),
@@ -345,7 +349,7 @@ class _SavePageState extends State<SavePage> {
     return Container(
         decoration: BoxDecoration(
             border: Border.all(
-              color: Color.fromARGB(255, 200, 202, 204),
+              color: const Color.fromARGB(255, 200, 202, 204),
               width: 3,
             ),
             borderRadius: BorderRadius.circular(7)),
@@ -377,9 +381,9 @@ class _SavePageState extends State<SavePage> {
                     transform: Matrix4.rotationY(3.6),
                     alignment: Alignment.topCenter,
                     child: IconButton(
-                        padding: EdgeInsets.all(0.20),
-                        color: Color.fromARGB(255, 200, 202, 204),
-                        icon: Icon(Icons.search),
+                        padding: const EdgeInsets.all(0.20),
+                        color: const Color.fromARGB(255, 200, 202, 204),
+                        icon: const Icon(Icons.search),
                         onPressed: (() {})),
                   )))
         ]));
@@ -389,7 +393,7 @@ class _SavePageState extends State<SavePage> {
     return Container(
         decoration: BoxDecoration(
             border: Border.all(
-              color: Color.fromARGB(255, 200, 202, 204),
+              color: const Color.fromARGB(255, 200, 202, 204),
               width: 3,
             ),
             borderRadius: BorderRadius.circular(7)),
@@ -416,7 +420,7 @@ class _SavePageState extends State<SavePage> {
     return Container(
         decoration: BoxDecoration(
             border: Border.all(
-              color: Color.fromARGB(255, 200, 202, 204),
+              color: const Color.fromARGB(255, 200, 202, 204),
               width: 3,
             ),
             borderRadius: BorderRadius.circular(7)),
@@ -447,9 +451,9 @@ class _SavePageState extends State<SavePage> {
               transform: Matrix4.rotationY(3.6),
               alignment: Alignment.topCenter,
               child: IconButton(
-                  padding: EdgeInsets.all(0.20),
-                  color: Color.fromARGB(255, 200, 202, 204),
-                  icon: Icon(Icons.search),
+                  padding: const EdgeInsets.all(0.20),
+                  color: const Color.fromARGB(255, 200, 202, 204),
+                  icon: const Icon(Icons.search),
                   onPressed: (() {})),
             ),
           ))
@@ -460,7 +464,7 @@ class _SavePageState extends State<SavePage> {
     return Container(
         decoration: BoxDecoration(
             border: Border.all(
-              color: Color.fromARGB(255, 200, 202, 204),
+              color: const Color.fromARGB(255, 200, 202, 204),
               width: 3,
             ),
             borderRadius: BorderRadius.circular(7)),
@@ -487,7 +491,7 @@ class _SavePageState extends State<SavePage> {
     return Container(
         decoration: BoxDecoration(
             border: Border.all(
-              color: Color.fromARGB(255, 200, 202, 204),
+              color: const Color.fromARGB(255, 200, 202, 204),
               width: 3,
             ),
             borderRadius: BorderRadius.circular(7)),
@@ -514,7 +518,7 @@ class _SavePageState extends State<SavePage> {
     return Container(
         decoration: BoxDecoration(
             border: Border.all(
-              color: Color.fromARGB(255, 200, 202, 204),
+              color: const Color.fromARGB(255, 200, 202, 204),
               width: 3,
             ),
             borderRadius: BorderRadius.circular(7)),
@@ -541,7 +545,7 @@ class _SavePageState extends State<SavePage> {
     return Container(
         decoration: BoxDecoration(
             border: Border.all(
-              color: Color.fromARGB(255, 200, 202, 204),
+              color: const Color.fromARGB(255, 200, 202, 204),
               width: 3,
             ),
             borderRadius: BorderRadius.circular(7)),
@@ -568,7 +572,7 @@ class _SavePageState extends State<SavePage> {
     return Container(
         decoration: BoxDecoration(
             border: Border.all(
-              color: Color.fromARGB(255, 200, 202, 204),
+              color: const Color.fromARGB(255, 200, 202, 204),
               width: 3,
             ),
             borderRadius: BorderRadius.circular(7)),
@@ -601,9 +605,9 @@ class _SavePageState extends State<SavePage> {
               transform: Matrix4.rotationY(3.6),
               alignment: Alignment.topCenter,
               child: IconButton(
-                  padding: EdgeInsets.all(0.20),
-                  color: Color.fromARGB(255, 200, 202, 204),
-                  icon: Icon(Icons.search),
+                  padding: const EdgeInsets.all(0.20),
+                  color: const Color.fromARGB(255, 200, 202, 204),
+                  icon: const Icon(Icons.search),
                   onPressed: (() {})),
             ),
           ))

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/formulario/form.dart';
 import 'package:flutter_application_1/formulario/muestraDatos.dart';
 import 'package:flutter_application_1/login.dart';
 
@@ -32,45 +31,41 @@ class _searchState extends State<search> {
               const Text("Productores de software",
                   style:
                       TextStyle(fontWeight: FontWeight.bold, fontSize: (20))),
-              SizedBox(
+              const SizedBox(
                 height: 5,
               ),
               //buscador
-              Container(
-                child: MaterialButton(
-                  onPressed: () {
-                    Navigator.of(context).push(
-                        MaterialPageRoute(builder: ((context) => search())));
-                  },
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 122, vertical: 18),
-                  color: Color.fromARGB(255, 124, 123, 123),
-                  child: const Text(
-                    "Buscador",
-                    style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
-                    textAlign: TextAlign.center,
-                  ),
+              MaterialButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: ((context) => search())));
+                },
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 122, vertical: 18),
+                color: Color.fromARGB(255, 124, 123, 123),
+                child: const Text(
+                  "Buscador",
+                  style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
+                  textAlign: TextAlign.center,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 4,
               ),
 
               //registro
-              Container(
-                child: MaterialButton(
-                  onPressed: () {
-                    Navigator.of(context).push(
-                        MaterialPageRoute(builder: ((context) => ListPage())));
-                  },
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 122, vertical: 18),
-                  color: Color.fromARGB(255, 124, 123, 123),
-                  child: const Text(
-                    "Registros",
-                    style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
-                    textAlign: TextAlign.center,
-                  ),
+              MaterialButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: ((context) => ListPage())));
+                },
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 122, vertical: 18),
+                color: const Color.fromARGB(255, 124, 123, 123),
+                child: const Text(
+                  "Registros",
+                  style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
+                  textAlign: TextAlign.center,
                 ),
               ),
 
@@ -99,25 +94,25 @@ class _searchState extends State<search> {
 
       //El appBar que es todo lo de arriba del body
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Busqueda",
           style: TextStyle(fontSize: 28),
         ),
         centerTitle: true,
-        backgroundColor: Color.fromARGB(255, 29, 73, 219),
+        backgroundColor: const Color.fromARGB(255, 29, 73, 219),
       ),
       body: Container(
         child: ListView(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 8,
               width: 2,
             ),
 
             //El texto de Usuario
             Container(
-              padding: EdgeInsets.fromLTRB(26, 20, 10, 10),
-              child: Text(
+              padding: const EdgeInsets.fromLTRB(26, 20, 10, 10),
+              child: const Text(
                 "Usuario",
                 style: TextStyle(
                     fontSize: 25,
@@ -139,7 +134,7 @@ class _searchState extends State<search> {
                 ),
                 child: TextField(
                   onChanged: (value) {},
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     border: InputBorder.none,
                     errorBorder: InputBorder.none,
                     enabledBorder: InputBorder.none,
@@ -156,14 +151,15 @@ class _searchState extends State<search> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 25, vertical: 2),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 25, vertical: 2),
                   child: FloatingActionButton(
-                      backgroundColor: Color.fromARGB(255, 29, 73, 219),
+                      backgroundColor: const Color.fromARGB(255, 29, 73, 219),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(100),
                       ),
-                      child: Icon(Icons.search),
-                      onPressed: (() {})),
+                      onPressed: (() {}),
+                      child: const Icon(Icons.search)),
                 )
               ],
             )

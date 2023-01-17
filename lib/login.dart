@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Search.dart';
 import 'package:flutter_application_1/formulario/datos.dart';
 import 'package:flutter_application_1/formulario/form.dart';
-import 'package:flutter_application_1/formulario/muestraDatos.dart';
 import 'package:flutter_application_1/formulario/operaciones.dart';
 
 class Home extends StatefulWidget {
@@ -25,9 +24,9 @@ class _HomeState extends State<Home> {
         children: <Widget>[
           Container(
             width: double.infinity,
-            padding: EdgeInsets.symmetric(vertical: 0),
-            child: Image.asset("assets/pensador.webp"),
+            padding: const EdgeInsets.symmetric(vertical: 0),
             height: 300,
+            child: Image.asset("assets/pensador.webp"),
           ),
 
           //Usuario y Contraseña
@@ -40,11 +39,11 @@ class _HomeState extends State<Home> {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   TextFormField(
-                    decoration: InputDecoration(labelText: "Usuario"),
+                    decoration: const InputDecoration(labelText: "Usuario"),
                   ),
-                  SizedBox(height: 40),
+                  const SizedBox(height: 40),
                   TextFormField(
-                    decoration: InputDecoration(labelText: "Contraseña"),
+                    decoration: const InputDecoration(labelText: "Contraseña"),
                     validator: (value) {
                       if (value!.isEmpty) {
                         return "ERROR:El usuario o contraseña esta incorrecta,vuelvalo intentarlo";
@@ -53,24 +52,24 @@ class _HomeState extends State<Home> {
                     },
                     obscureText: true,
                   ),
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
 
                   //Boton
                   MaterialButton(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
                     ),
-                    color: Color.fromARGB(255, 29, 73, 219),
+                    color: const Color.fromARGB(255, 29, 73, 219),
                     padding: const EdgeInsets.symmetric(vertical: 15),
                     onPressed: () {
-                      Navigator.of(context).push(
-                          MaterialPageRoute(builder: ((context) => search())));
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: ((context) => const search())));
                       _login(context);
                     },
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Text(
+                          const Text(
                             "Iniciar sesión",
                             style: TextStyle(color: Colors.white),
                           ),
@@ -81,7 +80,7 @@ class _HomeState extends State<Home> {
                               height: 20,
                               width: 20,
                               margin: const EdgeInsets.only(left: 20),
-                              child: CircularProgressIndicator(
+                              child: const CircularProgressIndicator(
                                 color: Colors.white,
                               ),
                             )
@@ -89,17 +88,17 @@ class _HomeState extends State<Home> {
                   ),
 
                   //Opcion para registrarse
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Text(
+                      const Text(
                         "¿No estas registrado?",
                       ),
                       TextButton(
-                        child: Text(
+                        child: const Text(
                           "Registrarse",
                           selectionColor: Color.fromARGB(255, 29, 73, 219),
                         ),
