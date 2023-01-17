@@ -40,7 +40,7 @@ class _searchState extends State<search> {
                 child: MaterialButton(
                   onPressed: () {
                     Navigator.of(context).push(
-                        MaterialPageRoute(builder: ((context) => Home())));
+                        MaterialPageRoute(builder: ((context) => search())));
                   },
                   padding:
                       const EdgeInsets.symmetric(horizontal: 122, vertical: 18),
