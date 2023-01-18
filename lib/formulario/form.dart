@@ -55,8 +55,8 @@ class _SavePageState extends State<SavePage> {
       onWillPop: _onWillPopScope,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Guardar"),
-        ),
+            title: const Text("Guardar"),
+            backgroundColor: const Color.fromARGB(255, 29, 73, 219)),
         body: Container(
           child: _buildForm(note),
         ),
@@ -78,137 +78,198 @@ class _SavePageState extends State<SavePage> {
 
   Widget _buildForm(Note note) {
     return Container(
-      padding: const EdgeInsets.all(15),
+      // alignment: Alignment.center,
+      width: 400,
+      padding: const EdgeInsets.all(60),
       child: Form(
         key: _formKey,
         child: ListView(
           children: <Widget>[
-            Row(children: [
-              _textoNovedad(context),
-              _textocodigo(context),
-            ]),
-            const SizedBox(
-              height: 10,
-            ),
+            //Novedad y Codigo
+            //Texto's Novedad y Codigo
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                textDirection: TextDirection.ltr,
+                children: [
+                  //Novedad Codigo
+                  //Texto's Novedad Codigo
+                  Expanded(
+                    flex: 3,
+                    child: _textoNovedad(context),
+                  ),
+                  Expanded(
+                    flex: 3,
+                    child: _textocodigo(context),
+                  ),
+                ]),
+            const SizedBox(
+              //espacio entre los textos y los container
+              height: 5,
+            ),
+            //Container's Novedad y Codigo
+            Row(
               children: [
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.4,
-                  height: MediaQuery.of(context).size.width * 0.09,
+                Flexible(
+                  flex: 3,
                   child: _Novedad(),
                 ),
                 SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.4,
-                    height: MediaQuery.of(context).size.width * 0.09,
-                    child: _codigo()),
+                  width: 20,
+                ),
+                Flexible(flex: 2, child: _codigo()),
                 SizedBox(
-                  width: 40,
+                  width: 4,
+                ),
+                Flexible(
+                  flex: 1,
                   child: botonCodigo(),
                 ),
               ],
             ),
-            _textoNombre(context),
+            //Funcionario Responsable
+            Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                textDirection: TextDirection.ltr,
+                children: [
+                  Expanded(
+                    flex: 3,
+                    child: _textoNombre(context),
+                  )
+                ]),
             const SizedBox(
-              height: 10,
-            ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.47,
-              height: MediaQuery.of(context).size.width * 0.09,
-              child: _Nombre(),
-            ),
-            _textocodDescrip(context),
-            const SizedBox(
-              height: 10,
+              //espacio entre los textos y los container
+              height: 5,
             ),
             Row(
               children: [
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.43,
-                  height: MediaQuery.of(context).size.width * 0.09,
+                Flexible(
+                  flex: 3,
+                  child: _Nombre(),
+                ),
+              ],
+            ),
+            //Descripción Dependencia
+            //Texto Descripción Dependencia
+            Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                textDirection: TextDirection.ltr,
+                children: [
+                  Expanded(
+                    flex: 3,
+                    child: _textocodDescrip(context),
+                  )
+                ]),
+            const SizedBox(
+              //espacio entre los textos y los container
+              height: 5,
+            ),
+            //container's CodOper OperResp
+            Row(
+              children: [
+                Flexible(
+                  flex: 2,
                   child: _codDescrip(),
                 ),
                 SizedBox(
-                  width: 40,
-                  child: botonCodigo(),
+                  width: 5,
+                ),
+                Flexible(
+                  flex: 1,
+                  child: bottonDescrip(),
                 ),
                 SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.34,
-                  height: MediaQuery.of(context).size.width * 0.09,
-                  child: _depenD(),
+                  width: 20,
+                ),
+                Flexible(flex: 4, child: _depenD()),
+              ],
+            ),
+            //Correo
+            Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                textDirection: TextDirection.ltr,
+                children: [
+                  Expanded(
+                    flex: 3,
+                    child: _textoCorreo(context),
+                  )
+                ]),
+            const SizedBox(
+              //espacio entre los textos y los container
+              height: 5,
+            ),
+            Row(
+              children: [
+                Flexible(
+                  flex: 3,
+                  child: _correo(),
                 ),
               ],
             ),
-            _textoCorreo(context),
+            //Cargo Funcionario
+            Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                textDirection: TextDirection.ltr,
+                children: [
+                  Expanded(
+                    flex: 3,
+                    child: _textocargo(context),
+                  )
+                ]),
             const SizedBox(
-              height: 10,
+              //espacio entre los textos y los container
+              height: 5,
             ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.47,
-              height: MediaQuery.of(context).size.width * 0.09,
-              child: _correo(),
-            ),
-            _textocargo(context),
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.47,
-              height: MediaQuery.of(context).size.width * 0.09,
-              child: _cargo(),
-            ),
-            _textooperResp(context),
             Row(
               children: [
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.45,
-                  height: MediaQuery.of(context).size.width * 0.09,
+                Flexible(
+                  flex: 3,
+                  child: _cargo(),
+                ),
+              ],
+            ),
+            //Operador Responsable
+            //Texto Operador Responsable
+            Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                textDirection: TextDirection.ltr,
+                children: [
+                  Expanded(
+                    flex: 3,
+                    child: _textooperResp(context),
+                  )
+                ]),
+            const SizedBox(
+              //espacio entre los textos y los container
+              height: 5,
+            ),
+            //container's CodOper OperResp
+            Row(
+              children: [
+                Flexible(
+                  flex: 2,
                   child: _codOper(),
                 ),
                 SizedBox(
-                  width: 40,
-                  child: botonCodigo(),
+                  width: 5,
+                ),
+                Flexible(
+                  flex: 1,
+                  child: bottonoperador(),
                 ),
                 SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.35,
-                  height: MediaQuery.of(context).size.width * 0.09,
-                  child: _operResp(),
+                  width: 20,
                 ),
+                Flexible(flex: 4, child: _operResp()),
               ],
             ),
             const SizedBox(
-              height: 30,
+              //espacio entre los textos y los container
+              height: 50,
             ),
-            MaterialButton(
-              color: Colors.blue,
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  if (note.id > 0) {
-                    // actualizacion
-                    note.novedad = novedadc.text;
-                    note.codigo = codigoc.text;
-                    note.nombre = nombrec.text;
-                    note.codDescrip = codDescripc.text;
-                    note.cargo = cargoc.text;
-                    note.correo = correc.text;
-                    note.depenD = depenDc.text;
-                    note.codOper = codOperc.text;
-                    note.operResp = operRespc.text;
-                    Operation.update(note);
-                  } else {
-                    // insercion
-                    Operation.insert(Note(
-                      novedad: novedadc.text,
-                      codigo: codigoc.text,
-                      nombre: nombrec.text,
-                      codDescrip: codDescripc.text,
-                      cargo: cargoc.text,
-                      correo: correc.text,
-                      depenD: depenDc.text,
-                      codOper: codOperc.text,
-                      operResp: operRespc.text,
-                    ));
-                  }
-                }
-              },
-              child: const Text("Guardar"),
+            Container(
+              child: buildButton(context),
+              width: 10,
+              height: 45,
             )
           ],
         ),
@@ -216,6 +277,7 @@ class _SavePageState extends State<SavePage> {
     );
   }
 
+//alert de guardado al salir de la opcion
   Future<bool> _onWillPopScope() async {
     return (await showDialog(
             context: context,
@@ -238,7 +300,7 @@ class _SavePageState extends State<SavePage> {
 
   Container _textoCorreo(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.fromLTRB(15, 15, 0, 0),
+      padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
       width: MediaQuery.of(context).size.width * 0.47,
       child: const Text('Correo: ',
           style: TextStyle(
@@ -248,11 +310,11 @@ class _SavePageState extends State<SavePage> {
     );
   }
 
-  Container _textocodigo(BuildContext context) {
+  Container _textoNovedad(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.fromLTRB(15, 15, 0, 0),
-      width: MediaQuery.of(context).size.width * 0.45,
-      child: const Text(' Código: ',
+      padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+      // width: MediaQuery.of(context).size.width * 0.20,
+      child: const Text('Novedad ',
           style: TextStyle(
               fontSize: 21,
               color: Color.fromARGB(255, 0, 51, 78),
@@ -260,11 +322,11 @@ class _SavePageState extends State<SavePage> {
     );
   }
 
-  Container _textoNovedad(BuildContext context) {
+  Container _textocodigo(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.fromLTRB(15, 15, 0, 0),
-      width: MediaQuery.of(context).size.width * 0.47,
-      child: const Text('Novedad ',
+      padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+      // width: MediaQuery.of(context).size.width * 0.20,
+      child: const Text(' Código: ',
           style: TextStyle(
               fontSize: 21,
               color: Color.fromARGB(255, 0, 51, 78),
@@ -274,7 +336,7 @@ class _SavePageState extends State<SavePage> {
 
   Container _textoNombre(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.fromLTRB(15, 15, 0, 0),
+      padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
       width: MediaQuery.of(context).size.width * 0.47,
       child: const Text('Funcionario Responsable: ',
           style: TextStyle(
@@ -286,7 +348,7 @@ class _SavePageState extends State<SavePage> {
 
   Container _textocodDescrip(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.fromLTRB(15, 15, 0, 0),
+      padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
       width: MediaQuery.of(context).size.width * 0.45,
       child: const Text('Descripción Dependencia: ',
           style: TextStyle(
@@ -310,7 +372,7 @@ class _SavePageState extends State<SavePage> {
 
   Container _textocargo(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.fromLTRB(15, 15, 0, 0),
+      padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
       width: MediaQuery.of(context).size.width * 0.47,
       child: const Text('Cargo Funcionario: ',
           style: TextStyle(
@@ -322,7 +384,7 @@ class _SavePageState extends State<SavePage> {
 
   Container _textooperResp(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.fromLTRB(15, 15, 0, 0),
+      padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
       width: MediaQuery.of(context).size.width * 0.47,
       child: const Text('Operador Responsable: ',
           style: TextStyle(
@@ -335,14 +397,15 @@ class _SavePageState extends State<SavePage> {
 //inpusttt
   Container _Novedad() {
     return Container(
+        height: 35,
+        width: 150,
         decoration: BoxDecoration(
             border: Border.all(
               color: const Color.fromARGB(255, 200, 202, 204),
-              width: 4,
+              width: 3,
             ),
             borderRadius: BorderRadius.circular(7)),
         padding: const EdgeInsets.symmetric(horizontal: 10),
-        margin: const EdgeInsets.symmetric(horizontal: 10),
         child: TextFormField(
           validator: (value) {
             if (value!.isEmpty) {
@@ -350,26 +413,30 @@ class _SavePageState extends State<SavePage> {
             }
             return null;
           },
-          controller: novedadc,
+          controller: codDescripc,
           maxLines: 1,
           style: const TextStyle(
             fontSize: 14,
           ),
           decoration:
-              const InputDecoration(border: InputBorder.none, hintText: ''),
+              const InputDecoration(border: InputBorder.none, hintText: ' '),
         ));
   }
 
   Container _codigo() {
     return Container(
+      padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+      height: 35,
+      width: 90,
       decoration: BoxDecoration(
           border: Border.all(
             color: const Color.fromARGB(255, 200, 202, 204),
             width: 3,
           ),
           borderRadius: BorderRadius.circular(7)),
-      padding: const EdgeInsets.symmetric(horizontal: 10),
-      margin: const EdgeInsets.symmetric(horizontal: 30),
+      // padding: const EdgeInsets.symmetric(horizontal: 10),
+      // margin: const EdgeInsets.symmetric(horizontal: 50),
+      margin: null,
       child: Expanded(
         child: TextFormField(
           validator: (value) {
@@ -392,6 +459,8 @@ class _SavePageState extends State<SavePage> {
   Container botonCodigo() {
     return Container(
         child: Ink(
+            height: 35,
+            width: 60,
             decoration: const ShapeDecoration(
                 color: Color.fromARGB(255, 29, 73, 219), shape: CircleBorder()),
             child: Transform(
@@ -407,6 +476,8 @@ class _SavePageState extends State<SavePage> {
 
   Container _Nombre() {
     return Container(
+        height: 35,
+        width: 282,
         decoration: BoxDecoration(
             border: Border.all(
               color: const Color.fromARGB(255, 200, 202, 204),
@@ -414,7 +485,6 @@ class _SavePageState extends State<SavePage> {
             ),
             borderRadius: BorderRadius.circular(7)),
         padding: const EdgeInsets.symmetric(horizontal: 10),
-        margin: const EdgeInsets.symmetric(horizontal: 10),
         child: TextFormField(
           validator: (value) {
             if (value!.isEmpty) {
@@ -434,14 +504,17 @@ class _SavePageState extends State<SavePage> {
 
   Container _codDescrip() {
     return Container(
+        padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+        height: 35,
+        width: 90,
         decoration: BoxDecoration(
             border: Border.all(
               color: const Color.fromARGB(255, 200, 202, 204),
               width: 3,
             ),
             borderRadius: BorderRadius.circular(7)),
-        padding: const EdgeInsets.symmetric(horizontal: 0.6),
-        margin: const EdgeInsets.symmetric(horizontal: 10),
+        // padding: const EdgeInsets.symmetric(horizontal: 0.6),
+        // margin: const EdgeInsets.symmetric(horizontal: 10),
         child: Row(children: [
           Expanded(
             child: TextFormField(
@@ -462,24 +535,28 @@ class _SavePageState extends State<SavePage> {
         ]));
   }
 
-  Ink bottonDescrip() {
-    return Ink(
-      decoration: const ShapeDecoration(
-          color: Color.fromARGB(255, 29, 73, 219), shape: CircleBorder()),
-      child: Transform(
-        transform: Matrix4.rotationY(3.6),
-        alignment: Alignment.topCenter,
-        child: IconButton(
-            padding: const EdgeInsets.all(0.20),
-            color: const Color.fromARGB(255, 200, 202, 204),
-            icon: const Icon(Icons.search),
-            onPressed: (() {})),
-      ),
-    );
+  Container bottonDescrip() {
+    return Container(
+        child: Ink(
+            height: 35,
+            width: 60,
+            decoration: const ShapeDecoration(
+                color: Color.fromARGB(255, 29, 73, 219), shape: CircleBorder()),
+            child: Transform(
+              transform: Matrix4.rotationY(3.6),
+              alignment: Alignment.topCenter,
+              child: IconButton(
+                  padding: const EdgeInsets.all(0.20),
+                  color: const Color.fromARGB(255, 200, 202, 204),
+                  icon: const Icon(Icons.search),
+                  onPressed: (() {})),
+            )));
   }
 
   Container _depenD() {
     return Container(
+        height: 35,
+        width: 282,
         decoration: BoxDecoration(
             border: Border.all(
               color: const Color.fromARGB(255, 200, 202, 204),
@@ -487,7 +564,6 @@ class _SavePageState extends State<SavePage> {
             ),
             borderRadius: BorderRadius.circular(7)),
         padding: const EdgeInsets.symmetric(horizontal: 10),
-        margin: const EdgeInsets.symmetric(horizontal: 10),
         child: TextFormField(
           validator: (value) {
             if (value!.isEmpty) {
@@ -507,6 +583,8 @@ class _SavePageState extends State<SavePage> {
 
   Container _correo() {
     return Container(
+        height: 35,
+        width: 282,
         decoration: BoxDecoration(
             border: Border.all(
               color: const Color.fromARGB(255, 200, 202, 204),
@@ -514,7 +592,6 @@ class _SavePageState extends State<SavePage> {
             ),
             borderRadius: BorderRadius.circular(7)),
         padding: const EdgeInsets.symmetric(horizontal: 10),
-        margin: const EdgeInsets.symmetric(horizontal: 10),
         child: TextFormField(
           validator: (value) {
             if (value!.isEmpty) {
@@ -534,6 +611,8 @@ class _SavePageState extends State<SavePage> {
 
   Container _cargo() {
     return Container(
+        height: 35,
+        width: 282,
         decoration: BoxDecoration(
             border: Border.all(
               color: const Color.fromARGB(255, 200, 202, 204),
@@ -541,7 +620,6 @@ class _SavePageState extends State<SavePage> {
             ),
             borderRadius: BorderRadius.circular(7)),
         padding: const EdgeInsets.symmetric(horizontal: 10),
-        margin: const EdgeInsets.symmetric(horizontal: 10),
         child: TextFormField(
           validator: (value) {
             if (value!.isEmpty) {
@@ -561,6 +639,8 @@ class _SavePageState extends State<SavePage> {
 
   Container _operResp() {
     return Container(
+        height: 35,
+        width: 282,
         decoration: BoxDecoration(
             border: Border.all(
               color: const Color.fromARGB(255, 200, 202, 204),
@@ -568,7 +648,6 @@ class _SavePageState extends State<SavePage> {
             ),
             borderRadius: BorderRadius.circular(7)),
         padding: const EdgeInsets.symmetric(horizontal: 10),
-        margin: const EdgeInsets.symmetric(horizontal: 10),
         child: TextFormField(
           validator: (value) {
             if (value!.isEmpty) {
@@ -588,16 +667,15 @@ class _SavePageState extends State<SavePage> {
 
   Container _codOper() {
     return Container(
+        height: 35,
+        width: 282,
         decoration: BoxDecoration(
             border: Border.all(
               color: const Color.fromARGB(255, 200, 202, 204),
               width: 3,
             ),
             borderRadius: BorderRadius.circular(7)),
-        padding: const EdgeInsets.fromLTRB(0.8, 0.8, 0, 0),
-        margin: const EdgeInsets.symmetric(horizontal: 10),
-        height: 6000,
-        width: 6000,
+        padding: const EdgeInsets.fromLTRB(10, 0.8, 0, 0),
         child: Row(children: [
           Expanded(
             child: TextFormField(
@@ -618,19 +696,54 @@ class _SavePageState extends State<SavePage> {
         ]));
   }
 
-  Ink bottonoperador() {
-    return Ink(
-      decoration: const ShapeDecoration(
-          color: Color.fromARGB(255, 29, 73, 219), shape: CircleBorder()),
-      child: Transform(
-        transform: Matrix4.rotationY(3.6),
-        alignment: Alignment.topCenter,
-        child: IconButton(
-            padding: const EdgeInsets.all(0.20),
-            color: const Color.fromARGB(255, 200, 202, 204),
-            icon: const Icon(Icons.search),
-            onPressed: (() {})),
-      ),
+  Container bottonoperador() {
+    return Container(
+        child: Ink(
+            height: 35,
+            width: 60,
+            decoration: const ShapeDecoration(
+                color: Color.fromARGB(255, 29, 73, 219), shape: CircleBorder()),
+            child: Transform(
+              transform: Matrix4.rotationY(3.6),
+              alignment: Alignment.topCenter,
+              child: IconButton(
+                  padding: const EdgeInsets.all(0.20),
+                  color: const Color.fromARGB(255, 200, 202, 204),
+                  icon: const Icon(Icons.search),
+                  onPressed: (() {})),
+            )));
+  }
+
+  Widget buildButton(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        FloatingActionButton(
+          backgroundColor: const Color.fromARGB(255, 29, 73, 219),
+          child: const Icon(
+            Icons.file_open_rounded,
+            size: 25,
+          ),
+          onPressed: () => increaseFn(),
+        ),
+        FloatingActionButton(
+          backgroundColor: const Color.fromARGB(255, 29, 73, 219),
+          child: const Icon(Icons.refresh_outlined, size: 30),
+          onPressed: () => iniFn(),
+        ),
+        FloatingActionButton(
+          backgroundColor: const Color.fromARGB(255, 29, 73, 219),
+          child: const Icon(
+            Icons.save_as_rounded,
+            size: 25,
+          ),
+          onPressed: () => increaseFn(),
+        ),
+      ],
     );
   }
+
+  increaseFn() {}
+
+  iniFn() {}
 }
