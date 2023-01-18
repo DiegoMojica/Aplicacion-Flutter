@@ -33,8 +33,7 @@ class __MyListState extends State<_MyList> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        backgroundColor: Color.fromARGB(255, 29, 73, 219),
+        backgroundColor: const Color.fromARGB(255, 29, 73, 219),
         onPressed: () {
           Navigator.pushNamed(context, SavePage.ROUTE, arguments: Note.empty())
               .then((value) => setState(
@@ -43,17 +42,16 @@ class __MyListState extends State<_MyList> {
                     },
                   ));
         },
+        child: const Icon(Icons.add),
       ),
       appBar: AppBar(
-        title: Text("Registros"),
-        backgroundColor: Color.fromARGB(255, 29, 73, 219),
+        title: const Text("Registros"),
+        backgroundColor: const Color.fromARGB(255, 29, 73, 219),
         centerTitle: true,
       ),
-      body: Container(
-        child: ListView.builder(
-          itemCount: notes.length,
-          itemBuilder: (_, i) => _createItem(i),
-        ),
+      body: ListView.builder(
+        itemCount: notes.length,
+        itemBuilder: (_, i) => _createItem(i),
       ),
     );
   }
@@ -83,7 +81,7 @@ class __MyListState extends State<_MyList> {
         Operation.delete(notes[i]);
       },
       child: ListTile(
-        title: Text(notes[i].nombre),
+        title: Text(notes[i].novedad),
         trailing: MaterialButton(
           onPressed: () {
             Navigator.pushNamed(context, SavePage.ROUTE, arguments: notes[i])
@@ -94,7 +92,7 @@ class __MyListState extends State<_MyList> {
                     ));
           },
           child: Ink(
-              padding: EdgeInsets.all(5),
+              padding: const EdgeInsets.all(5),
               decoration: const ShapeDecoration(
                 color: Color.fromARGB(255, 29, 73, 219),
                 shape: CircleBorder(),

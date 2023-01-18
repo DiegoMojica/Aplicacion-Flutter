@@ -7,51 +7,66 @@ import 'package:path/path.dart';
 
 class Operation {
   static Future<Database> _openDB() async {
-    return openDatabase(join(await getDatabasesPath(), 'note.db'),
+    return openDatabase(join(await getDatabasesPath(), 'datos.db'),
         onCreate: (db, version) {
-      return db.execute(
-        "CREATE TABLE note (id INTEGER PRIMARY KEY, nombre TEXT, edad TEXT, telefono TEXT, correo TEXT, fecha TEXT, )",
-      );
+      return db.execute('''
+CREATE TABLE datos (
+  id INTEGER PRIMARY KEY, 
+  novedad TEXT, 
+  codigo TEXT, 
+  nombre TEXT, 
+  codDescrip TEXT, 
+  cargo TEXT, 
+  correo TEXT, 
+  telefono TEXT, 
+  usuario TEXT, 
+  operResp TEXT, 
+  )
+      ''');
     }, version: 1);
   }
 
-  static Future<int> insert(Note note) async {
+  static Future<int> insert(Note notes) async {
     Database database = await _openDB();
 
-    return database.insert("note", note.toMap());
+    return database.insert("datos", notes.toMap());
   }
 
-  static Future<int> delete(Note note) async {
+  static Future<int> delete(Note notes) async {
     Database database = await _openDB();
 
-    return database.delete("note", where: 'id = ?', whereArgs: [note.id]);
+    return database.delete("datos", where: 'id = ?', whereArgs: [notes.id]);
   }
 
-  static Future<int> update(Note note) async {
+  static Future<int> update(Note notes) async {
     Database database = await _openDB();
 
     return database
-        .update("note", note.toMap(), where: 'id = ?', whereArgs: [note.id]);
+        .update("datos", notes.toMap(), where: 'id = ?', whereArgs: [notes.id]);
   }
 
   static Future<List<Note>> notes() async {
     Database database = await _openDB();
 
-    final List<Map<String, dynamic>> notesMap = await database.query("note");
+    final List<Map<String, dynamic>> datossMap = await database.query("datos");
 
-    for (var n in notesMap) {
-      print("____" + n['nombre']);
+    for (var n in datossMap) {
+      print("__" + n['nombre']);
     }
 
     return List.generate(
-        notesMap.length,
+        datossMap.length,
         (i) => Note(
-              id: notesMap[i]['id'],
-              nombre: notesMap[i]['nombre'],
-              edad: notesMap[i]['edad'],
-              telefono: notesMap[i]['telefono'],
-              correo: notesMap[i]['correo'],
-              fecha: notesMap[i]['fecha'],
+              id: datossMap[i]['id'],
+              novedad: datossMap[i]['novedad'],
+              codigo: datossMap[i]['codigo'],
+              nombre: datossMap[i]['nombre'],
+              codDescrip: datossMap[i]['codDescrip'],
+              cargo: datossMap[i]['cargo'],
+              depenD: datossMap[i]['depenD'],
+              correo: datossMap[i]['correo'],
+              codOper: datossMap[i]['codOper'],
+              operResp: datossMap[i]['operResp'],
             ));
   }
 }

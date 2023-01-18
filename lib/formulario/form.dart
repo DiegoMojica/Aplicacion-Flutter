@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_application_1/formulario/datos.dart';
 import 'package:flutter_application_1/formulario/operaciones.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-import 'package:quickalert/quickalert.dart';
+import 'package:quickalert/models/quickalert_type.dart';
+import 'package:quickalert/widgets/quickalert_dialog.dart';
 
 class SavePage extends StatefulWidget {
   static const String ROUTE = "/save";
@@ -12,24 +14,6 @@ class SavePage extends StatefulWidget {
 }
 
 class _SavePageState extends State<SavePage> {
-  void showAlert(QuickAlertType quickAlertType) {
-    QuickAlert.show(
-        context: context,
-        title: 'guardado',
-        text: 'Se aguardado correctamente la informacion',
-        barrierColor: Color.fromARGB(255, 163, 164, 165),
-        type: quickAlertType);
-  }
-
-  void showAlertt(QuickAlertType quickAlertType) {
-    QuickAlert.show(
-        context: context,
-        title: 'Error',
-        text: 'Tiene espacios vacíos en el formulario',
-        barrierColor: Color.fromARGB(255, 163, 164, 165),
-        type: quickAlertType);
-  }
-
   final _formKey = GlobalKey<FormState>();
   var cardTarjeta = MaskTextInputFormatter(
       mask: 'CC #.###.###-###',
@@ -50,11 +34,17 @@ class _SavePageState extends State<SavePage> {
       filter: {"#": RegExp(r'[0-9]')},
       type: MaskAutoCompletionType.lazy);
 
-  final NombreController = TextEditingController();
-  final Nombre2Controller = TextEditingController();
-  final apellidoController = TextEditingController();
-  final apellido2Controller = TextEditingController();
-  final CorreoController = TextEditingController();
+  //nuevas variables
+  final novedadc = TextEditingController();
+  final codigoc = TextEditingController();
+  final nombrec = TextEditingController();
+  final codDescripc = TextEditingController();
+  final cargoc = TextEditingController();
+  final depenDc = TextEditingController();
+  final correc = TextEditingController();
+  final codOperc = TextEditingController();
+  final operRespc = TextEditingController();
+  final descripcionc = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -65,9 +55,8 @@ class _SavePageState extends State<SavePage> {
       onWillPop: _onWillPopScope,
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Guardar"),
-          backgroundColor: Color.fromARGB(255, 29, 73, 219),
-        ),
+            title: const Text("Guardar"),
+            backgroundColor: const Color.fromARGB(255, 29, 73, 219)),
         body: Container(
           child: _buildForm(note),
         ),
@@ -76,92 +65,211 @@ class _SavePageState extends State<SavePage> {
   }
 
   _init(Note note) {
-    NombreController.text = note.nombre;
-    Nombre2Controller.text = note.edad;
-    apellidoController.text = note.telefono;
-    apellido2Controller.text = note.correo;
-    CorreoController.text = note.fecha;
+    novedadc.text = note.novedad;
+    codigoc.text = note.codigo;
+    nombrec.text = note.nombre;
+    codDescripc.text = note.codDescrip;
+    cargoc.text = note.cargo;
+    correc.text = note.correo;
+    depenDc.text = note.depenD;
+    codOperc.text = note.codOper;
+    operRespc.text = note.operResp;
   }
 
   Widget _buildForm(Note note) {
     return Container(
-      padding: EdgeInsets.all(15),
+      // alignment: Alignment.center,
+      width: 400,
+      padding: const EdgeInsets.all(60),
       child: Form(
         key: _formKey,
         child: ListView(
           children: <Widget>[
-            Row(children: [
-              _textoNombre(context),
-              _textoNombre2(context),
-            ]),
+            //Novedad y Codigo
+            //Texto's Novedad y Codigo
+            Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                textDirection: TextDirection.ltr,
+                children: [
+                  //Novedad Codigo
+                  //Texto's Novedad Codigo
+                  Expanded(
+                    flex: 3,
+                    child: _textoNovedad(context),
+                  ),
+                  Expanded(
+                    flex: 3,
+                    child: _textocodigo(context),
+                  ),
+                ]),
             const SizedBox(
-              height: 15,
+              //espacio entre los textos y los container
+              height: 5,
             ),
+            //Container's Novedad y Codigo
             Row(
               children: [
-                Container(
-                  width: MediaQuery.of(context).size.width * 0.47,
-                  child: _nombre(),
+                Flexible(
+                  flex: 3,
+                  child: _Novedad(),
                 ),
-                Container(
-                  width: MediaQuery.of(context).size.width * 0.47,
-                  child: _nombre2(),
+                SizedBox(
+                  width: 20,
+                ),
+                Flexible(flex: 2, child: _codigo()),
+                SizedBox(
+                  width: 4,
+                ),
+                Flexible(
+                  flex: 1,
+                  child: botonCodigo(),
                 ),
               ],
             ),
-            Row(children: [
-              _textoApellido(context),
-              _textoApellido2(context),
-            ]),
+            //Funcionario Responsable
+            Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                textDirection: TextDirection.ltr,
+                children: [
+                  Expanded(
+                    flex: 3,
+                    child: _textoNombre(context),
+                  )
+                ]),
             const SizedBox(
-              height: 10,
+              //espacio entre los textos y los container
+              height: 5,
             ),
             Row(
               children: [
-                Container(
-                  width: MediaQuery.of(context).size.width * 0.47,
-                  child: _Apellido(),
-                ),
-                Container(
-                  width: MediaQuery.of(context).size.width * 0.47,
-                  child: _apellido2(),
+                Flexible(
+                  flex: 3,
+                  child: _Nombre(),
                 ),
               ],
             ),
-            _textoCorreo(context),
-            SizedBox(
-              height: 10,
-            ),
-            _correo(),
+            //Descripción Dependencia
+            //Texto Descripción Dependencia
+            Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                textDirection: TextDirection.ltr,
+                children: [
+                  Expanded(
+                    flex: 3,
+                    child: _textocodDescrip(context),
+                  )
+                ]),
             const SizedBox(
-              height: 10,
+              //espacio entre los textos y los container
+              height: 5,
             ),
-            MaterialButton(
-              child: Text("Guardar"),
-              color: Color.fromARGB(255, 29, 73, 219),
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  if (note.id > 0) {
-                    // actualizacion
-                    note.nombre = NombreController.text;
-                    note.edad = Nombre2Controller.text;
-                    note.telefono = apellidoController.text;
-                    note.correo = apellido2Controller.text;
-                    note.fecha = CorreoController.text;
-                    Operation.update(note);
-                  } else {
-                    // insercion
-                    Operation.insert(Note(
-                      nombre: NombreController.text,
-                      edad: Nombre2Controller.text,
-                      telefono: apellidoController.text,
-                      correo: apellido2Controller.text,
-                      fecha: CorreoController.text,
-                    ));
-                  }
-                  showAlert(QuickAlertType.confirm);
-                }
-              },
+            //container's CodOper OperResp
+            Row(
+              children: [
+                Flexible(
+                  flex: 2,
+                  child: _codDescrip(),
+                ),
+                SizedBox(
+                  width: 5,
+                ),
+                Flexible(
+                  flex: 1,
+                  child: bottonDescrip(),
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Flexible(flex: 4, child: _depenD()),
+              ],
+            ),
+            //Correo
+            Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                textDirection: TextDirection.ltr,
+                children: [
+                  Expanded(
+                    flex: 3,
+                    child: _textoCorreo(context),
+                  )
+                ]),
+            const SizedBox(
+              //espacio entre los textos y los container
+              height: 5,
+            ),
+            Row(
+              children: [
+                Flexible(
+                  flex: 3,
+                  child: _correo(),
+                ),
+              ],
+            ),
+            //Cargo Funcionario
+            Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                textDirection: TextDirection.ltr,
+                children: [
+                  Expanded(
+                    flex: 3,
+                    child: _textocargo(context),
+                  )
+                ]),
+            const SizedBox(
+              //espacio entre los textos y los container
+              height: 5,
+            ),
+            Row(
+              children: [
+                Flexible(
+                  flex: 3,
+                  child: _cargo(),
+                ),
+              ],
+            ),
+            //Operador Responsable
+            //Texto Operador Responsable
+            Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                textDirection: TextDirection.ltr,
+                children: [
+                  Expanded(
+                    flex: 3,
+                    child: _textooperResp(context),
+                  )
+                ]),
+            const SizedBox(
+              //espacio entre los textos y los container
+              height: 5,
+            ),
+            //container's CodOper OperResp
+            Row(
+              children: [
+                Flexible(
+                  flex: 2,
+                  child: _codOper(),
+                ),
+                SizedBox(
+                  width: 5,
+                ),
+                Flexible(
+                  flex: 1,
+                  child: bottonoperador(),
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Flexible(flex: 4, child: _operResp()),
+              ],
+            ),
+            const SizedBox(
+              //espacio entre los textos y los container
+              height: 50,
+            ),
+            Container(
+              child: buildButton(context),
+              width: 10,
+              height: 45,
             )
           ],
         ),
@@ -169,74 +277,30 @@ class _SavePageState extends State<SavePage> {
     );
   }
 
+//alert de guardado al salir de la opcion
   Future<bool> _onWillPopScope() async {
     return (await showDialog(
             context: context,
             builder: (context) => AlertDialog(
-                  title: Text('¿Salir del Registro? '),
+                  title:
+                      const Text('¿Seguro que quieres salir del formulario? '),
+                  content: const Text('Tienes datos sin guardar'),
                   actions: [
                     MaterialButton(
                         onPressed: () => Navigator.of(context).pop(false),
-                        child: Text('No')),
+                        child: const Text('No')),
                     MaterialButton(
-                        onPressed: () => Navigator.of(context).pop(true),
-                        child: Text('Si'))
+                      onPressed: () => Navigator.of(context).pop(true),
+                      child: const Text('Si'),
+                    )
                   ],
                 ))) ??
         false;
   }
 
-  Container _textoNombre(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.fromLTRB(15, 15, 0, 0),
-      width: MediaQuery.of(context).size.width * 0.47,
-      child: const Text('Primer nombre: ',
-          style: TextStyle(
-              fontSize: 20,
-              color: Color.fromARGB(255, 0, 51, 78),
-              fontWeight: FontWeight.bold)),
-    );
-  }
-
-  Container _textoNombre2(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.fromLTRB(15, 15, 0, 0),
-      width: MediaQuery.of(context).size.width * 0.47,
-      child: const Text('Segundo nombre: ',
-          style: TextStyle(
-              fontSize: 20,
-              color: Color.fromARGB(255, 0, 51, 78),
-              fontWeight: FontWeight.bold)),
-    );
-  }
-
-  Container _textoApellido(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.fromLTRB(15, 15, 0, 0),
-      width: MediaQuery.of(context).size.width * 0.47,
-      child: const Text('Primer Apellido: ',
-          style: TextStyle(
-              fontSize: 20,
-              color: Color.fromARGB(255, 0, 51, 78),
-              fontWeight: FontWeight.bold)),
-    );
-  }
-
-  Container _textoApellido2(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.fromLTRB(15, 15, 0, 0),
-      width: MediaQuery.of(context).size.width * 0.47,
-      child: const Text('Segundo Apellido: ',
-          style: TextStyle(
-              fontSize: 20,
-              color: Color.fromARGB(255, 0, 51, 78),
-              fontWeight: FontWeight.bold)),
-    );
-  }
-
   Container _textoCorreo(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.fromLTRB(15, 15, 0, 0),
+      padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
       width: MediaQuery.of(context).size.width * 0.47,
       child: const Text('Correo: ',
           style: TextStyle(
@@ -246,70 +310,102 @@ class _SavePageState extends State<SavePage> {
     );
   }
 
-  Container _nombre() {
+  Container _textoNovedad(BuildContext context) {
     return Container(
-        decoration: BoxDecoration(
-            border: Border.all(
-              color: Color.fromARGB(255, 200, 202, 204),
-              width: 3,
-            ),
-            borderRadius: BorderRadius.circular(7)),
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        margin: const EdgeInsets.symmetric(horizontal: 10),
-        child: TextFormField(
-          validator: (value) {
-            if (value!.isEmpty) {
-              return "Tiene que colocar un telefono";
-            }
-            return null;
-          },
-          controller: NombreController,
-          maxLines: 1,
-          style: const TextStyle(
-            fontSize: 20,
-          ),
-          decoration:
-              const InputDecoration(border: InputBorder.none, hintText: ''),
-        ));
+      padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+      // width: MediaQuery.of(context).size.width * 0.20,
+      child: const Text('Novedad ',
+          style: TextStyle(
+              fontSize: 21,
+              color: Color.fromARGB(255, 0, 51, 78),
+              fontWeight: FontWeight.bold)),
+    );
   }
 
-  Container _nombre2() {
+  Container _textocodigo(BuildContext context) {
     return Container(
-        decoration: BoxDecoration(
-            border: Border.all(
-              color: Color.fromARGB(255, 200, 202, 204),
-              width: 3,
-            ),
-            borderRadius: BorderRadius.circular(7)),
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        margin: const EdgeInsets.symmetric(horizontal: 10),
-        child: TextFormField(
-          validator: (value) {
-            if (value!.isEmpty) {
-              return "Tiene que colocar un telefono";
-            }
-            return null;
-          },
-          controller: Nombre2Controller,
-          maxLines: 1,
-          style: const TextStyle(
-            fontSize: 20,
-          ),
-          decoration:
-              const InputDecoration(border: InputBorder.none, hintText: ''),
-        ));
+      padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+      // width: MediaQuery.of(context).size.width * 0.20,
+      child: const Text(' Código: ',
+          style: TextStyle(
+              fontSize: 21,
+              color: Color.fromARGB(255, 0, 51, 78),
+              fontWeight: FontWeight.bold)),
+    );
   }
 
-  Container _Apellido() {
+  Container _textoNombre(BuildContext context) {
     return Container(
+      padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
+      width: MediaQuery.of(context).size.width * 0.47,
+      child: const Text('Funcionario Responsable: ',
+          style: TextStyle(
+              fontSize: 21,
+              color: Color.fromARGB(255, 0, 51, 78),
+              fontWeight: FontWeight.bold)),
+    );
+  }
+
+  Container _textocodDescrip(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
+      width: MediaQuery.of(context).size.width * 0.45,
+      child: const Text('Descripción Dependencia: ',
+          style: TextStyle(
+              fontSize: 21,
+              color: Color.fromARGB(255, 0, 51, 78),
+              fontWeight: FontWeight.bold)),
+    );
+  }
+
+  // Container _textTelefono(BuildContext context) {
+  //   return Container(
+  //     padding: const EdgeInsets.fromLTRB(15, 15, 0, 0),
+  //     width: MediaQuery.of(context).size.width * 0.45,
+  //     child: const Text('Telefono: ',
+  //         style: TextStyle(
+  //             fontSize: 21,
+  //             color: Color.fromARGB(255, 0, 51, 78),
+  //             fontWeight: FontWeight.bold)),
+  //   );
+  // }
+
+  Container _textocargo(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
+      width: MediaQuery.of(context).size.width * 0.47,
+      child: const Text('Cargo Funcionario: ',
+          style: TextStyle(
+              fontSize: 21,
+              color: Color.fromARGB(255, 0, 51, 78),
+              fontWeight: FontWeight.bold)),
+    );
+  }
+
+  Container _textooperResp(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
+      width: MediaQuery.of(context).size.width * 0.47,
+      child: const Text('Operador Responsable: ',
+          style: TextStyle(
+              fontSize: 21,
+              color: Color.fromARGB(255, 0, 51, 78),
+              fontWeight: FontWeight.bold)),
+    );
+  }
+
+//inpusttt
+  Container _Novedad() {
+    return Container(
+        height: 35,
+        width: 150,
         decoration: BoxDecoration(
             border: Border.all(
-              color: Color.fromARGB(255, 200, 202, 204),
+              color: const Color.fromARGB(255, 200, 202, 204),
               width: 3,
             ),
             borderRadius: BorderRadius.circular(7)),
         padding: const EdgeInsets.symmetric(horizontal: 10),
-        margin: const EdgeInsets.symmetric(horizontal: 10),
         child: TextFormField(
           validator: (value) {
             if (value!.isEmpty) {
@@ -317,26 +413,31 @@ class _SavePageState extends State<SavePage> {
             }
             return null;
           },
-          controller: apellidoController,
+          controller: codDescripc,
           maxLines: 1,
           style: const TextStyle(
-            fontSize: 20,
+            fontSize: 14,
           ),
           decoration:
               const InputDecoration(border: InputBorder.none, hintText: ' '),
         ));
   }
 
-  Container _apellido2() {
+  Container _codigo() {
     return Container(
-        decoration: BoxDecoration(
-            border: Border.all(
-              color: Color.fromARGB(255, 200, 202, 204),
-              width: 3,
-            ),
-            borderRadius: BorderRadius.circular(7)),
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        margin: const EdgeInsets.symmetric(horizontal: 10),
+      padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+      height: 35,
+      width: 90,
+      decoration: BoxDecoration(
+          border: Border.all(
+            color: const Color.fromARGB(255, 200, 202, 204),
+            width: 3,
+          ),
+          borderRadius: BorderRadius.circular(7)),
+      // padding: const EdgeInsets.symmetric(horizontal: 10),
+      // margin: const EdgeInsets.symmetric(horizontal: 50),
+      margin: null,
+      child: Expanded(
         child: TextFormField(
           validator: (value) {
             if (value!.isEmpty) {
@@ -344,25 +445,153 @@ class _SavePageState extends State<SavePage> {
             }
             return null;
           },
-          controller: apellido2Controller,
+          controller: codigoc,
           style: const TextStyle(
-            fontSize: 20,
+            fontSize: 14,
           ),
           decoration:
               const InputDecoration(border: InputBorder.none, hintText: ' '),
+        ),
+      ),
+    );
+  }
+
+  Container botonCodigo() {
+    return Container(
+        child: Ink(
+            height: 35,
+            width: 60,
+            decoration: const ShapeDecoration(
+                color: Color.fromARGB(255, 29, 73, 219), shape: CircleBorder()),
+            child: Transform(
+              transform: Matrix4.rotationY(3.6),
+              alignment: Alignment.topCenter,
+              child: IconButton(
+                  padding: const EdgeInsets.all(0.20),
+                  color: const Color.fromARGB(255, 200, 202, 204),
+                  icon: const Icon(Icons.search),
+                  onPressed: (() {})),
+            )));
+  }
+
+  Container _Nombre() {
+    return Container(
+        height: 35,
+        width: 282,
+        decoration: BoxDecoration(
+            border: Border.all(
+              color: const Color.fromARGB(255, 200, 202, 204),
+              width: 3,
+            ),
+            borderRadius: BorderRadius.circular(7)),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: TextFormField(
+          validator: (value) {
+            if (value!.isEmpty) {
+              return "Tiene que colocar un telefono";
+            }
+            return null;
+          },
+          controller: codDescripc,
+          maxLines: 1,
+          style: const TextStyle(
+            fontSize: 14,
+          ),
+          decoration:
+              const InputDecoration(border: InputBorder.none, hintText: ' '),
+        ));
+  }
+
+  Container _codDescrip() {
+    return Container(
+        padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+        height: 35,
+        width: 90,
+        decoration: BoxDecoration(
+            border: Border.all(
+              color: const Color.fromARGB(255, 200, 202, 204),
+              width: 3,
+            ),
+            borderRadius: BorderRadius.circular(7)),
+        // padding: const EdgeInsets.symmetric(horizontal: 0.6),
+        // margin: const EdgeInsets.symmetric(horizontal: 10),
+        child: Row(children: [
+          Expanded(
+            child: TextFormField(
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return "Tiene que colocar un telefono";
+                }
+                return null;
+              },
+              controller: codigoc,
+              style: const TextStyle(
+                fontSize: 14,
+              ),
+              decoration: const InputDecoration(
+                  border: InputBorder.none, hintText: ' '),
+            ),
+          )
+        ]));
+  }
+
+  Container bottonDescrip() {
+    return Container(
+        child: Ink(
+            height: 35,
+            width: 60,
+            decoration: const ShapeDecoration(
+                color: Color.fromARGB(255, 29, 73, 219), shape: CircleBorder()),
+            child: Transform(
+              transform: Matrix4.rotationY(3.6),
+              alignment: Alignment.topCenter,
+              child: IconButton(
+                  padding: const EdgeInsets.all(0.20),
+                  color: const Color.fromARGB(255, 200, 202, 204),
+                  icon: const Icon(Icons.search),
+                  onPressed: (() {})),
+            )));
+  }
+
+  Container _depenD() {
+    return Container(
+        height: 35,
+        width: 282,
+        decoration: BoxDecoration(
+            border: Border.all(
+              color: const Color.fromARGB(255, 200, 202, 204),
+              width: 3,
+            ),
+            borderRadius: BorderRadius.circular(7)),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: TextFormField(
+          validator: (value) {
+            if (value!.isEmpty) {
+              return "Tiene que colocar un telefono";
+            }
+            return null;
+          },
+          controller: cargoc,
+          maxLines: 1,
+          style: const TextStyle(
+            fontSize: 14,
+          ),
+          decoration:
+              const InputDecoration(border: InputBorder.none, hintText: ''),
         ));
   }
 
   Container _correo() {
     return Container(
+        height: 35,
+        width: 282,
         decoration: BoxDecoration(
             border: Border.all(
-              color: Color.fromARGB(255, 200, 202, 204),
+              color: const Color.fromARGB(255, 200, 202, 204),
               width: 3,
             ),
             borderRadius: BorderRadius.circular(7)),
         padding: const EdgeInsets.symmetric(horizontal: 10),
-        margin: const EdgeInsets.symmetric(horizontal: 10),
         child: TextFormField(
           validator: (value) {
             if (value!.isEmpty) {
@@ -370,13 +599,151 @@ class _SavePageState extends State<SavePage> {
             }
             return null;
           },
-          controller: CorreoController,
+          controller: correc,
           maxLines: 1,
           style: const TextStyle(
-            fontSize: 20,
+            fontSize: 14,
           ),
           decoration:
               const InputDecoration(border: InputBorder.none, hintText: ' '),
         ));
   }
+
+  Container _cargo() {
+    return Container(
+        height: 35,
+        width: 282,
+        decoration: BoxDecoration(
+            border: Border.all(
+              color: const Color.fromARGB(255, 200, 202, 204),
+              width: 3,
+            ),
+            borderRadius: BorderRadius.circular(7)),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: TextFormField(
+          validator: (value) {
+            if (value!.isEmpty) {
+              return "Tiene que colocar un telefono";
+            }
+            return null;
+          },
+          controller: codOperc,
+          maxLines: 1,
+          style: const TextStyle(
+            fontSize: 14,
+          ),
+          decoration:
+              const InputDecoration(border: InputBorder.none, hintText: ''),
+        ));
+  }
+
+  Container _operResp() {
+    return Container(
+        height: 35,
+        width: 282,
+        decoration: BoxDecoration(
+            border: Border.all(
+              color: const Color.fromARGB(255, 200, 202, 204),
+              width: 3,
+            ),
+            borderRadius: BorderRadius.circular(7)),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: TextFormField(
+          validator: (value) {
+            if (value!.isEmpty) {
+              return "Tiene que colocar un telefono";
+            }
+            return null;
+          },
+          controller: operRespc,
+          maxLines: 1,
+          style: const TextStyle(
+            fontSize: 14,
+          ),
+          decoration:
+              const InputDecoration(border: InputBorder.none, hintText: ''),
+        ));
+  }
+
+  Container _codOper() {
+    return Container(
+        height: 35,
+        width: 282,
+        decoration: BoxDecoration(
+            border: Border.all(
+              color: const Color.fromARGB(255, 200, 202, 204),
+              width: 3,
+            ),
+            borderRadius: BorderRadius.circular(7)),
+        padding: const EdgeInsets.fromLTRB(10, 0.8, 0, 0),
+        child: Row(children: [
+          Expanded(
+            child: TextFormField(
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return "Tiene que colocar un telefono";
+                }
+                return null;
+              },
+              controller: codigoc,
+              style: const TextStyle(
+                fontSize: 14,
+              ),
+              decoration: const InputDecoration(
+                  border: InputBorder.none, hintText: ' '),
+            ),
+          ),
+        ]));
+  }
+
+  Container bottonoperador() {
+    return Container(
+        child: Ink(
+            height: 35,
+            width: 60,
+            decoration: const ShapeDecoration(
+                color: Color.fromARGB(255, 29, 73, 219), shape: CircleBorder()),
+            child: Transform(
+              transform: Matrix4.rotationY(3.6),
+              alignment: Alignment.topCenter,
+              child: IconButton(
+                  padding: const EdgeInsets.all(0.20),
+                  color: const Color.fromARGB(255, 200, 202, 204),
+                  icon: const Icon(Icons.search),
+                  onPressed: (() {})),
+            )));
+  }
+
+  Widget buildButton(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        FloatingActionButton(
+          backgroundColor: const Color.fromARGB(255, 29, 73, 219),
+          child: const Icon(
+            Icons.file_open_rounded,
+            size: 25,
+          ),
+          onPressed: () => increaseFn(),
+        ),
+        FloatingActionButton(
+          backgroundColor: const Color.fromARGB(255, 29, 73, 219),
+          child: const Icon(Icons.refresh_outlined, size: 30),
+          onPressed: () => iniFn(),
+        ),
+        FloatingActionButton(
+          backgroundColor: const Color.fromARGB(255, 29, 73, 219),
+          child: const Icon(
+            Icons.save_as_rounded,
+            size: 25,
+          ),
+          onPressed: () => increaseFn(),
+        ),
+      ],
+    );
+  }
+
+  increaseFn() {}
+
+  iniFn() {}
 }
