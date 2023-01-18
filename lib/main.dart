@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/PDF/pdf.dart';
 
 import 'package:flutter_application_1/formulario/form.dart';
 import 'package:flutter_application_1/formulario/muestraDatos.dart';
@@ -16,12 +17,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: Home.ROUTE,
-      routes: {
-        Home.ROUTE: (_) => Home(),
-        SavePage.ROUTE: (_) => SavePage(),
-        ListPage.ROUTE: (_) => ListPage()
-      },
+      theme: ThemeData(
+      primarySwatch: Colors.blue,
+      ),
+      home: PdfPage(),
+      // initialRoute: Home.ROUTE,
+      // routes: {
+      //   Home.ROUTE: (_) => Home(),
+      //   SavePage.ROUTE: (_) => SavePage(),
+      //   ListPage.ROUTE: (_) => ListPage()
+      // },
     );
   }
 }
