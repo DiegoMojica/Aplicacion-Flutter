@@ -81,12 +81,16 @@ class _SavePageState extends State<SavePage> {
   Widget _buildForm(Note note) {
     return Container(
       // alignment: Alignment.center,
-      width: 400,
-      padding: const EdgeInsets.all(60),
+      width: 450,
+      padding: const EdgeInsets.all(50),
       child: Form(
         key: _formKey,
         child: ListView(
           children: <Widget>[
+            const SizedBox(
+              //espacio entre los textos y los container
+              height: 30,
+            ),
             //Novedad y Codigo
             //Texto's Novedad y Codigo
             Row(
@@ -112,7 +116,7 @@ class _SavePageState extends State<SavePage> {
             Row(
               children: [
                 Flexible(
-                  flex: 3,
+                  flex: 4,
                   child: _Novedad(),
                 ),
                 SizedBox(
@@ -138,8 +142,8 @@ class _SavePageState extends State<SavePage> {
                     child: _textoNombre(context),
                   )
                 ]),
+            //espacio entre los textos y los container
             const SizedBox(
-              //espacio entre los textos y los container
               height: 5,
             ),
             Row(
@@ -161,8 +165,8 @@ class _SavePageState extends State<SavePage> {
                     child: _textocodDescrip(context),
                   )
                 ]),
+            //espacio entre los textos y los container
             const SizedBox(
-              //espacio entre los textos y los container
               height: 5,
             ),
             //container's CodOper OperResp
@@ -195,14 +199,14 @@ class _SavePageState extends State<SavePage> {
                     child: _textoCorreo(context),
                   )
                 ]),
+            //espacio entre los textos y los container
             const SizedBox(
-              //espacio entre los textos y los container
               height: 5,
             ),
             Row(
               children: [
                 Flexible(
-                  flex: 3,
+                  flex: 1,
                   child: _correo(),
                 ),
               ],
@@ -221,6 +225,7 @@ class _SavePageState extends State<SavePage> {
               //espacio entre los textos y los container
               height: 5,
             ),
+            //container Funcionario
             Row(
               children: [
                 Flexible(
@@ -266,8 +271,9 @@ class _SavePageState extends State<SavePage> {
             ),
             const SizedBox(
               //espacio entre los textos y los container
-              height: 50,
+              height: 90,
             ),
+            //botones
             Container(
                 width: 45,
                 height: 45,
@@ -427,7 +433,7 @@ class _SavePageState extends State<SavePage> {
   Container _Novedad() {
     return Container(
         height: 35,
-        width: 150,
+        width: 250,
         decoration: BoxDecoration(
             border: Border.all(
               color: const Color.fromARGB(255, 200, 202, 204),
@@ -506,7 +512,7 @@ class _SavePageState extends State<SavePage> {
   Container _Nombre() {
     return Container(
         height: 35,
-        width: 282,
+        width: 450,
         decoration: BoxDecoration(
             border: Border.all(
               color: const Color.fromARGB(255, 200, 202, 204),
@@ -613,7 +619,7 @@ class _SavePageState extends State<SavePage> {
   Container _correo() {
     return Container(
         height: 35,
-        width: 282,
+        width: 450,
         decoration: BoxDecoration(
             border: Border.all(
               color: const Color.fromARGB(255, 200, 202, 204),
@@ -641,7 +647,7 @@ class _SavePageState extends State<SavePage> {
   Container _cargo() {
     return Container(
         height: 35,
-        width: 282,
+        width: 450,
         decoration: BoxDecoration(
             border: Border.all(
               color: const Color.fromARGB(255, 200, 202, 204),
