@@ -17,15 +17,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-      primarySwatch: Colors.blue,
+        primarySwatch: Colors.blue,
       ),
-      home: PdfPage(),
-      // initialRoute: Home.ROUTE,
-      // routes: {
-      //   Home.ROUTE: (_) => Home(),
-      //   SavePage.ROUTE: (_) => SavePage(),
-      //   ListPage.ROUTE: (_) => ListPage()
-      // },
+      // home: PdfPage(),
+      initialRoute: Home.ROUTE,
+      routes: {
+        Home.ROUTE: (_) => Home(),
+        SavePage.ROUTE: (_) => SavePage(),
+        ListPage.ROUTE: (_) => ListPage()
+      },
     );
   }
 }

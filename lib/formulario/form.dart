@@ -6,6 +6,8 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
 
+import '../PDF/pdf.dart';
+
 class SavePage extends StatefulWidget {
   static const String ROUTE = "/save";
 
@@ -267,10 +269,37 @@ class _SavePageState extends State<SavePage> {
               height: 50,
             ),
             Container(
-              child: buildButton(context),
-              width: 10,
-              height: 45,
-            )
+                width: 45,
+                height: 45,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    FloatingActionButton(
+                      backgroundColor: const Color.fromARGB(255, 29, 73, 219),
+                      child: const Icon(
+                        Icons.file_open_rounded,
+                        size: 25,
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: ((context) => PdfPage())));
+                      },
+                    ),
+                    FloatingActionButton(
+                      backgroundColor: const Color.fromARGB(255, 29, 73, 219),
+                      child: const Icon(Icons.refresh_outlined, size: 30),
+                      onPressed: () => iniFn(),
+                    ),
+                    FloatingActionButton(
+                      backgroundColor: const Color.fromARGB(255, 29, 73, 219),
+                      child: const Icon(
+                        Icons.save_as_rounded,
+                        size: 25,
+                      ),
+                      onPressed: () => increaseFn(),
+                    ),
+                  ],
+                )),
           ],
         ),
       ),
@@ -724,7 +753,10 @@ class _SavePageState extends State<SavePage> {
             Icons.file_open_rounded,
             size: 25,
           ),
-          onPressed: () => increaseFn(),
+          onPressed: () {
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: ((context) => PdfPage())));
+          },
         ),
         FloatingActionButton(
           backgroundColor: const Color.fromARGB(255, 29, 73, 219),
