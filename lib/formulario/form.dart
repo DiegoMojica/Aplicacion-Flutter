@@ -87,8 +87,8 @@ class _SavePageState extends State<SavePage> {
         key: _formKey,
         child: ListView(
           children: <Widget>[
+            //espacio Primer Container
             const SizedBox(
-              //espacio entre los textos y los container
               height: 30,
             ),
             //Novedad y Codigo
@@ -104,8 +104,11 @@ class _SavePageState extends State<SavePage> {
                     child: _textoNovedad(context),
                   ),
                   Expanded(
-                    flex: 3,
+                    flex: 2,
                     child: _textocodigo(context),
+                  ),
+                  SizedBox(
+                    width: 15,
                   ),
                 ]),
             const SizedBox(
@@ -119,11 +122,11 @@ class _SavePageState extends State<SavePage> {
                   flex: 4,
                   child: _Novedad(),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 20,
                 ),
                 Flexible(flex: 2, child: _codigo()),
-                SizedBox(
+                const SizedBox(
                   width: 4,
                 ),
                 Flexible(
@@ -269,8 +272,8 @@ class _SavePageState extends State<SavePage> {
                 Flexible(flex: 4, child: _operResp()),
               ],
             ),
+            //espacio entre el Formulario y Botones
             const SizedBox(
-              //espacio entre los textos y los container
               height: 90,
             ),
             //botones
@@ -336,36 +339,37 @@ class _SavePageState extends State<SavePage> {
   Container _textoCorreo(BuildContext context) {
     return Container(
       padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
-      width: MediaQuery.of(context).size.width * 0.47,
+      width: MediaQuery.of(context).size.width * 0.50,
       child: const Text('Correo: ',
           style: TextStyle(
               fontSize: 21,
               color: Color.fromARGB(255, 0, 51, 78),
-              fontWeight: FontWeight.bold)),
+              fontWeight: FontWeight.w600)),
     );
   }
 
   Container _textoNovedad(BuildContext context) {
     return Container(
+      width: 200,
       padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
       // width: MediaQuery.of(context).size.width * 0.20,
       child: const Text('Novedad ',
           style: TextStyle(
               fontSize: 21,
               color: Color.fromARGB(255, 0, 51, 78),
-              fontWeight: FontWeight.bold)),
+              fontWeight: FontWeight.w600)),
     );
   }
 
   Container _textocodigo(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+      padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
       // width: MediaQuery.of(context).size.width * 0.20,
       child: const Text(' Código: ',
           style: TextStyle(
               fontSize: 21,
               color: Color.fromARGB(255, 0, 51, 78),
-              fontWeight: FontWeight.bold)),
+              fontWeight: FontWeight.w600)),
     );
   }
 
@@ -377,7 +381,7 @@ class _SavePageState extends State<SavePage> {
           style: TextStyle(
               fontSize: 21,
               color: Color.fromARGB(255, 0, 51, 78),
-              fontWeight: FontWeight.bold)),
+              fontWeight: FontWeight.w600)),
     );
   }
 
@@ -389,7 +393,7 @@ class _SavePageState extends State<SavePage> {
           style: TextStyle(
               fontSize: 21,
               color: Color.fromARGB(255, 0, 51, 78),
-              fontWeight: FontWeight.bold)),
+              fontWeight: FontWeight.w600)),
     );
   }
 
@@ -413,7 +417,7 @@ class _SavePageState extends State<SavePage> {
           style: TextStyle(
               fontSize: 21,
               color: Color.fromARGB(255, 0, 51, 78),
-              fontWeight: FontWeight.bold)),
+              fontWeight: FontWeight.w600)),
     );
   }
 
@@ -425,7 +429,7 @@ class _SavePageState extends State<SavePage> {
           style: TextStyle(
               fontSize: 21,
               color: Color.fromARGB(255, 0, 51, 78),
-              fontWeight: FontWeight.bold)),
+              fontWeight: FontWeight.w600)),
     );
   }
 
@@ -437,7 +441,7 @@ class _SavePageState extends State<SavePage> {
         decoration: BoxDecoration(
             border: Border.all(
               color: const Color.fromARGB(255, 200, 202, 204),
-              width: 3,
+              width: 2,
             ),
             borderRadius: BorderRadius.circular(7)),
         padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -466,7 +470,7 @@ class _SavePageState extends State<SavePage> {
       decoration: BoxDecoration(
           border: Border.all(
             color: const Color.fromARGB(255, 200, 202, 204),
-            width: 3,
+            width: 2,
           ),
           borderRadius: BorderRadius.circular(7)),
       // padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -516,7 +520,7 @@ class _SavePageState extends State<SavePage> {
         decoration: BoxDecoration(
             border: Border.all(
               color: const Color.fromARGB(255, 200, 202, 204),
-              width: 3,
+              width: 2,
             ),
             borderRadius: BorderRadius.circular(7)),
         padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -545,7 +549,7 @@ class _SavePageState extends State<SavePage> {
         decoration: BoxDecoration(
             border: Border.all(
               color: const Color.fromARGB(255, 200, 202, 204),
-              width: 3,
+              width: 2,
             ),
             borderRadius: BorderRadius.circular(7)),
         // padding: const EdgeInsets.symmetric(horizontal: 0.6),
@@ -595,7 +599,7 @@ class _SavePageState extends State<SavePage> {
         decoration: BoxDecoration(
             border: Border.all(
               color: const Color.fromARGB(255, 200, 202, 204),
-              width: 3,
+              width: 2,
             ),
             borderRadius: BorderRadius.circular(7)),
         padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -623,7 +627,7 @@ class _SavePageState extends State<SavePage> {
         decoration: BoxDecoration(
             border: Border.all(
               color: const Color.fromARGB(255, 200, 202, 204),
-              width: 3,
+              width: 2,
             ),
             borderRadius: BorderRadius.circular(7)),
         padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -651,7 +655,7 @@ class _SavePageState extends State<SavePage> {
         decoration: BoxDecoration(
             border: Border.all(
               color: const Color.fromARGB(255, 200, 202, 204),
-              width: 3,
+              width: 2,
             ),
             borderRadius: BorderRadius.circular(7)),
         padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -679,7 +683,7 @@ class _SavePageState extends State<SavePage> {
         decoration: BoxDecoration(
             border: Border.all(
               color: const Color.fromARGB(255, 200, 202, 204),
-              width: 3,
+              width: 2,
             ),
             borderRadius: BorderRadius.circular(7)),
         padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -707,7 +711,7 @@ class _SavePageState extends State<SavePage> {
         decoration: BoxDecoration(
             border: Border.all(
               color: const Color.fromARGB(255, 200, 202, 204),
-              width: 3,
+              width: 2,
             ),
             borderRadius: BorderRadius.circular(7)),
         padding: const EdgeInsets.fromLTRB(10, 0.8, 0, 0),
