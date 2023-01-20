@@ -448,7 +448,7 @@ class _SavePageState extends State<SavePage> {
             }
             return null;
           },
-          controller: codDescripc,
+          controller: novedadc,
           maxLines: 1,
           style: const TextStyle(
             fontSize: 14,
@@ -527,7 +527,7 @@ class _SavePageState extends State<SavePage> {
             }
             return null;
           },
-          controller: codDescripc,
+          controller: nombrec,
           maxLines: 1,
           style: const TextStyle(
             fontSize: 14,
@@ -559,7 +559,7 @@ class _SavePageState extends State<SavePage> {
                 }
                 return null;
               },
-              controller: codigoc,
+              controller: codDescripc,
               style: const TextStyle(
                 fontSize: 14,
               ),
@@ -606,7 +606,7 @@ class _SavePageState extends State<SavePage> {
             }
             return null;
           },
-          controller: cargoc,
+          controller: depenDc,
           maxLines: 1,
           style: const TextStyle(
             fontSize: 14,
@@ -662,7 +662,7 @@ class _SavePageState extends State<SavePage> {
             }
             return null;
           },
-          controller: codOperc,
+          controller: cargoc,
           maxLines: 1,
           style: const TextStyle(
             fontSize: 14,
@@ -720,7 +720,7 @@ class _SavePageState extends State<SavePage> {
                 }
                 return null;
               },
-              controller: codigoc,
+              controller: codOperc,
               style: const TextStyle(
                 fontSize: 14,
               ),
